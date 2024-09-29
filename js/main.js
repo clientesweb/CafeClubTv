@@ -9,28 +9,13 @@ import WhatsAppFloat from './components/WhatsAppFloat.js';
 import BottomNav from './components/BottomNav.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const app = document.getElementById('app');
-    app.innerHTML = `
-        ${Header()}
-        <main class="background-container">
-            <div class="main-container">
-                ${Carousel()}
-                ${Playlists()}
-                ${Shorts()}
-                ${Sponsors()}
-            </div>
-        </main>
-        ${Counters()}
-        ${Footer()}
-        ${WhatsAppFloat()}
-        ${BottomNav()}
-    `;
-
-    // Inicializar componentes que requieren JavaScript después de que el DOM esté listo
-    Carousel.init();
-    Playlists.init();
-    Shorts.init();
-    Sponsors.init();
-    Counters.init();
-    WhatsAppFloat.init();
+    Header();
+    Carousel();
+    Playlists();
+    Shorts();
+    Sponsors();
+    Counters();
+    Footer();
+    WhatsAppFloat();
+    BottomNav();
 });
