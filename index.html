@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CafeClubTV</title>
-    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon"> <!-- Añadir un favicon -->
+    <meta name="description" content="Bienvenido a CafeClubTV, tu lugar para disfrutar de los mejores videos y playlists.">
+    <meta name="keywords" content="CafeClubTV, videos, playlists, entretenimiento">
+    <link rel="icon" href="path/to/favicon-32x32.png" sizes="32x32" type="image/png"> <!-- Verificar ruta del favicon -->
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-white to-gray-300 text-gray-800 font-sans">
     <header id="header"></header>
-    <main class="container mx-auto px-4 py-8">
-        <div id="carousel"></div>
-        <div id="playlists"></div>
-        <div id="shorts"></div>
-        <div id="sponsors"></div>
-        <div id="counters"></div>
+    <main class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> <!-- Uso de Grid -->
+        <div id="carousel" class="col-span-1 md:col-span-2 lg:col-span-3"></div> <!-- Ajustes de columnas -->
+        <div id="playlists" class="col-span-1"></div>
+        <div id="shorts" class="col-span-1"></div>
+        <div id="sponsors" class="col-span-1"></div>
+        <div id="counters" class="col-span-1"></div>
     </main>
     <footer id="footer"></footer>
     <div id="whatsapp-float"></div>
     <nav id="bottom-nav"></nav>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Mover al final -->
-    <script src="js/main.js" type="module"></script>
+    <!-- Mover Font Awesome al final para mejorar la carga inicial -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/main.js" type="module" defer></script> <!-- Usar defer para no bloquear el DOM -->
 </body>
 </html>
