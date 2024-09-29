@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafe Club TV</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
     <div id="app">
-        <navigation-component></navigation-component>
-        <image-carousel-component></image-carousel-component>
-        <playlist-slider-component></playlist-slider-component>
-        <youtube-shorts-component></youtube-shorts-component>
-        <sponsors-slider-component></sponsors-slider-component>
-        <counters-component></counters-component>
+        <header-component></header-component>
+        <main>
+            <image-carousel-component></image-carousel-component>
+            <playlist-slider-component></playlist-slider-component>
+            <shorts-section-component></shorts-section-component>
+            <sponsors-section-component></sponsors-section-component>
+            <counters-section-component></counters-section-component>
+        </main>
+        <footer-component></footer-component>
         <whatsapp-float-component></whatsapp-float-component>
-        <install-button-component></install-button-component>
+        <bottom-nav-component></bottom-nav-component>
     </div>
+    <script src="js/utils/componentLoader.js"></script>
     <script src="js/app.js" type="module"></script>
 </body>
 </html>
