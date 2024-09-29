@@ -1,9 +1,0 @@
-// app.js
-import './components/navigation.js';
-import './components/shorts.js';
-import './components/sponsors.js';
-import './components/carousel.js';
-import './components/playlist.js';
-import './components/whatsapp.js';
-import './components/installButton.js';
-import './components/counters.js';
