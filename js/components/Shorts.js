@@ -1,39 +1,65 @@
-export default function Shorts() {
-    const shorts = document.getElementById('shorts');
+const API_KEY = 'AIzaSyB4HGg2WVC-Sq3Qyj9T9Z9aBBGbET1oGs0';
+const PLAYLIST_ID = 'PLZ_v3bWMqpjFa0xI11mahmOCxPk_1TK2s';
+const MAX_RESULTS = 5;
+const FETCH_RESULTS = 35;
 
-    shorts.innerHTML = `
-        <section class="my-12">
-            <h2 class="text-2xl font-bold mb-6">Shorts</h2>
-            <div class="flex overflow-x-auto space-x-4 pb-4" id="shorts-container">
-                <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden animate-pulse"></div>
-                <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden animate-pulse"></div>
-                <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden animate-pulse"></div>
-            </div>
+export default function Shorts() {
+    return `
+        <section id="shorts-section">
+            <!-- Los Shorts se cargarán aquí dinámicamente -->
         </section>
     `;
-
-    // Simular una llamada a la API
-    setTimeout(() => {
-        const shortsData = [
-            { id: 's1', title: 'Short 1' },
-            { id: 's2', title: 'Short 2' },
-            { id: 's3', title: 'Short 3' },
-            { id: 's4', title: 'Short 4' },
-            { id: 's5', title: 'Short 5' },
-        ];
-
-        const shortsContainer = document.getElementById('shorts-container');
-        shortsContainer.innerHTML = shortsData.map(short => `
-            <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden">
-                <iframe
-                    src="https://www.youtube.com/embed/${short.id}"
-                    title="${short.title}"
-                    class="w-full h-full"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                ></iframe>
-            </div>
-        `).join('');
-    }, 1000);
 }
+
+Shorts.init = () => {
+    const shortsSection = document.getElementById('shorts-section');
+
+    function showLoader() {
+        for (let i = 0; i < MAX_RESULTS; i++) {
+            const shortItem = document.createElement('div');
+            shortItem.className = 'short-item loader';
+            shortsSection.appendChild(shortItem);
+        }
+    }
+
+    function removeLoader() {
+        const loaders = document.querySelectorAll('.loader');
+        loaders.forEach(loader => loader.remove());
+    }
+
+    function fetchPlaylistVideos(pageToken = '') {
+        const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${FETCH_RESULTS}&playlistId=${PLAYLIST_ID}&key=${API_KEY}&pageToken=${pageToken}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                removeLoader();
+                const itemsToShow = data.items.reverse().slice(0, MAX_RESULTS);
+                itemsToShow.forEach(item => {
+                    const videoId = item.snippet.resourceId.videoId;
+                    const shortElement = createShortElement(videoId);
+                    shortsSection.appendChild(shortElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error al cargar la playlist de YouTube:', error);
+                removeLoader();
+            });
+    }
+
+    function createShortElement(videoId) {
+        const shortItem = document.createElement('div');
+        shortItem.className = 'short-item';
+        shortItem.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/${videoId}?rel=0"
+                    loading="lazy"
+                    frameborder="0"
+                    allowfullscreen>
+            </iframe>
+        `;
+        return shortItem;
+    }
+
+    showLoader();
+    fetchPlaylistVideos();
+};
