@@ -1,28 +1,43 @@
-class Header extends HTMLElement {
+// components/Header.js
+class Header {
     constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
-
-    connectedCallback() {
-        this.render();
+        this.element = document.createElement('header');
     }
 
     render() {
-        this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="css/components/Header.css">
-            <header>
-                <div class="logo">
-                    <img src="images/logo.svg" alt="Logo de Cafe Club TV">
-                </div>
-                <div class="install-container">
-                    <button class="install-button">
-                        <i class="fas fa-download"></i> Instalar CafeClubTV App
-                    </button>
-                </div>
-            </header>
+        this.element.innerHTML = `
+            <div class="logo">
+                <img src="images/logi.svg" alt="Logo de Cafe Club Tv">
+            </div>
+            <div class="install-container">
+                <button id="install-button" class="install-button" style="display: none;">
+                    <i class="fas fa-download"></i> Instalar CafeClubTV App
+                </button>
+            </div>
         `;
+        return this.element;
+    }
+
+    setupInstallButton() {
+        let deferredPrompt;
+        const installButton = this.element.querySelector('#install-button');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                }
+                deferredPrompt = null;
+            }
+            installButton.style.display = 'none';
+        });
     }
 }
-
-customElements.define('header-component', Header);
