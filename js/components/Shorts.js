@@ -3,7 +3,7 @@ export default async function Shorts() {
 
     shorts.innerHTML = `
         <section class="my-12">
-            <h2 class="text-2xl font-bold mb-6">Shorts</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center">Shorts</h2>
             <div class="flex overflow-x-auto space-x-4 pb-4" id="shorts-container">
                 <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden animate-pulse"></div>
                 <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden animate-pulse"></div>
@@ -28,7 +28,7 @@ export default async function Shorts() {
 
         // Verificar si hay shorts en la playlist
         if (!shortsData || shortsData.length === 0) {
-            shortsContainer.innerHTML = '<p>No shorts found in this playlist.</p>';
+            shortsContainer.innerHTML = '<p class="text-center text-gray-600">No shorts found in this playlist.</p>';
             return;
         }
 
@@ -36,7 +36,7 @@ export default async function Shorts() {
         const latestShorts = shortsData.slice(0, 5); // No es necesario invertir, ya que la API devuelve los más recientes
 
         shortsContainer.innerHTML = latestShorts.map(short => `
-            <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden">
+            <div class="flex-none w-48 h-80 rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-300">
                 <iframe
                     src="https://www.youtube.com/embed/${short.snippet.resourceId.videoId}"
                     title="${short.snippet.title}"
@@ -51,6 +51,6 @@ export default async function Shorts() {
     } catch (error) {
         console.error('Error fetching the playlist:', error);
         const shortsContainer = document.getElementById('shorts-container');
-        shortsContainer.innerHTML = '<p>Error fetching the shorts. Please try again later.</p>';
+        shortsContainer.innerHTML = '<p class="text-center text-red-600">Error fetching the shorts. Please try again later.</p>';
     }
 }
