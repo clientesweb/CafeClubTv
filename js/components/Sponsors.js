@@ -12,7 +12,7 @@ export default function Sponsors() {
         <section class="my-12 bg-gradient-to-r from-red-800 via-gray-300 to-white p-6 rounded-lg shadow-lg">
             <h2 class="text-2xl font-bold mb-6 text-white">Nuestros Patrocinadores</h2>
             <div class="overflow-hidden">
-                <div class="flex items-center justify-start space-x-4 animate-slide" id="sponsorSlider">
+                <div class="flex items-center justify-start space-x-4 transition-transform duration-700 ease-in-out" id="sponsorSlider">
                     ${sponsorsData.map(sponsor => `
                         <div class="min-w-[120px] h-24 bg-white rounded-full shadow-md flex items-center justify-center p-2 transition-transform duration-300 hover:scale-110">
                             <img src="${sponsor.logo}" alt="${sponsor.name}" class="max-w-full max-h-full object-contain">
