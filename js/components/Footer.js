@@ -4,10 +4,12 @@ export default function Footer() {
     footer.innerHTML = `
         <footer class="bg-gradient-to-r from-red-800 to-gray-300 text-white py-12">
             <div class="container mx-auto px-4 flex flex-wrap justify-between">
+                <!-- Logo y descripción -->
                 <div class="w-full md:w-1/3 mb-8 md:mb-0">
-                    <img src="/images/logi.svg" alt="Logo de Cafe Club Tv" class="h-16 mb-4">
+                    <img src="https://clientesweb.github.io/CafeClubTv/images/logi.svg" alt="Logo de Cafe Club Tv" class="h-16 mb-4">
                     <p class="text-sm">Estamos comprometidos con ofrecerte la mejor experiencia en entretenimiento y servicios en línea.</p>
                 </div>
+                <!-- Redes sociales -->
                 <div class="w-full md:w-1/3 mb-8 md:mb-0">
                     <h3 class="text-lg font-semibold mb-4">Conéctate con Nosotros</h3>
                     <div class="flex space-x-4">
@@ -17,6 +19,7 @@ export default function Footer() {
                         <a href="https://youtube.com/@cafeclubtv" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-gray-300 transition-colors"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+                <!-- Mapa -->
                 <div class="w-full md:w-1/3">
                     <h3 class="text-lg font-semibold mb-4">Encuéntranos</h3>
                     <div class="h-48 bg-gray-200 rounded-lg overflow-hidden">
@@ -33,7 +36,8 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div class="mt-8 text-center text-sm">
+            <!-- Texto "Powered by Duality Domain" -->
+            <div class="mt-8 text-center text-sm pb-16">
                 <p>Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener noreferrer" class="underline">Duality Domain</a> | &copy; 2024 Todos los derechos reservados.</p>
             </div>
         </footer>
