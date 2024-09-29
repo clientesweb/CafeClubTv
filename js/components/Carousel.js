@@ -21,10 +21,16 @@ export default function Carousel() {
                         data-src="${src}" 
                         alt="Slide" 
                         class="w-full h-full object-cover flex-shrink-0 lazy-load opacity-0 transition-opacity duration-500"
-                    >`).join('')}
+                    >
+                `).join('')}
             </div>
-            <button class="prev absolute top-1/2 left-4 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all">&#10094;</button>
-            <button class="next absolute top-1/2 right-4 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all">&#10095;</button>
+            <button class="prev absolute top-1/2 left-4 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">&#10094;</button>
+            <button class="next absolute top-1/2 right-4 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">&#10095;</button>
+            <div class="indicators absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                ${images.map((_, index) => `
+                    <button class="indicator w-3 h-3 bg-gray-400 rounded-full focus:outline-none ${index === 0 ? 'bg-red-600' : ''}" data-index="${index}"></button>
+                `).join('')}
+            </div>
         </div>
     `;
 
@@ -32,6 +38,7 @@ export default function Carousel() {
     const prevButton = carousel.querySelector('.prev');
     const nextButton = carousel.querySelector('.next');
     const slides = carousel.querySelectorAll('.lazy-load');
+    const indicators = carousel.querySelectorAll('.indicator');
 
     // Función para cargar imágenes con lazy loading
     function loadSlideImage(index) {
@@ -53,9 +60,18 @@ export default function Carousel() {
         slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
         
         loadSlideImage(currentSlide);
-        
+        updateIndicators();
+
         requestAnimationFrame(() => {
             isTransitioning = false;
+        });
+    }
+
+    // Actualizar indicadores
+    function updateIndicators() {
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('bg-red-600', index === currentSlide);
+            indicator.classList.toggle('bg-gray-400', index !== currentSlide);
         });
     }
 
@@ -65,6 +81,13 @@ export default function Carousel() {
 
     nextButton.addEventListener('click', () => {
         showSlide((currentSlide + 1) % images.length);
+    });
+
+    indicators.forEach(indicator => {
+        indicator.addEventListener('click', () => {
+            const index = parseInt(indicator.getAttribute('data-index'));
+            showSlide(index);
+        });
     });
 
     // Auto-desplazamiento cada 5 segundos
