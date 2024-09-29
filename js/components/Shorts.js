@@ -13,10 +13,10 @@ export default function Shorts() {
     `;
 
     // Llamada a la API de YouTube
-    const API_KEY = 'AIzaSyB4HGg2WVC-Sq3Qyj9T9Z9aBBGbET1oGs0'; // Considera usar variables de entorno en producción
-    const PLAYLIST_ID = 'PLZ_v3bWMqpjFa0xI11mahmOCxPk_1TK2s'; // Asegúrate de que sea la ID correcta
+    const API_KEY = 'AIzaSyB4HGg2WVC-Sq3Qyj9T9Z9aBBGbET1oGs0'; // Reemplaza esto con tu clave API
+    const PLAYLIST_ID = 'PLZ_v3bWMqpjFa0xI11mahmOCxPk_1TK2s'; // Reemplaza esto con la ID de tu playlist
 
-    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
+    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=5&key=${API_KEY}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok: ' + response.statusText);
@@ -32,7 +32,10 @@ export default function Shorts() {
                 return;
             }
 
-            shortsContainer.innerHTML = shortsData.map(short => `
+            // Asegurarse de que se están mostrando los últimos 5 shorts
+            const latestShorts = shortsData.slice(0, 5).reverse(); // Invertir para mostrar los más recientes primero
+
+            shortsContainer.innerHTML = latestShorts.map(short => `
                 <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden">
                     <iframe
                         src="https://www.youtube.com/embed/${short.snippet.resourceId.videoId}"
