@@ -1,12 +1,12 @@
 export default function Carousel() {
     const carousel = document.getElementById('carousel');
     const images = [
-        '/images/image1.jpg',
-        '/images/image2 (1).jpg',
-        '/images/image3.jpg',
-        '/images/image4.jpg',
-        '/images/image5.jpg',
-        '/images/image6.jpg'
+        '../images/image1.jpg',
+        '../images/image2 (1).jpg',
+        '../images/image3.jpg',
+        '../images/image4.jpg',
+        '../images/image5.jpg',
+        '../images/image6.jpg'
     ];
 
     let currentSlide = 0;
