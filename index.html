@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Club TV</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>Cafe Club Tv</title>
+    <meta name="description" content="Descubre lo mejor en entretenimiento y servicios en línea con Cafe Club Tv.">
+    <link rel="icon" href="images/Icon512x512.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Cafe Club Tv">
+    <meta property="og:description" content="Descubre lo mejor en entretenimiento y servicios en línea con Cafe Club Tv.">
+    <meta property="og:image" content="https://tudominio.com/og-image.jpg">
+    <meta property="og:url" content="https://tudominio.com">
 </head>
 <body>
-    <div id="app">
-        <header-component></header-component>
-        <main>
-            <image-carousel-component></image-carousel-component>
-            <playlist-slider-component></playlist-slider-component>
-            <shorts-section-component></shorts-section-component>
-            <sponsors-section-component></sponsors-section-component>
-            <counters-section-component></counters-section-component>
-        </main>
-        <footer-component></footer-component>
-        <whatsapp-float-component></whatsapp-float-component>
-        <bottom-nav-component></bottom-nav-component>
-    </div>
-    <script src="js/utils/componentLoader.js"></script>
-    <script src="js/app.js" type="module"></script>
+    <div id="app"></div>
+    <script src="components/Header.js"></script>
+    <script src="components/Carousel.js"></script>
+    <script src="components/Playlists.js"></script>
+    <script src="components/Shorts.js"></script>
+    <script src="components/Sponsors.js"></script>
+    <script src="components/Counters.js"></script>
+    <script src="components/Footer.js"></script>
+    <script src="components/WhatsAppFloat.js"></script>
+    <script src="components/BottomNav.js"></script>
+    <script src="app.js"></script>
+    <script src="service-worker.js"></script>
 </body>
 </html>
