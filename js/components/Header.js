@@ -1,32 +1,43 @@
-export default function Header() {
-    const header = document.getElementById('header');
-    
-    function checkInstallable() {
-        const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
-        const isInstagram = /Instagram/.test(navigator.userAgent);
-        return !isInstalled || isInstagram;
+// components/Header.js
+class Header {
+    constructor() {
+        this.element = document.createElement('header');
     }
 
-    const isInstallable = checkInstallable();
-
-    header.innerHTML = `
-        <header class="bg-gray-200 bg-opacity-80 backdrop-blur-md text-gray-800 p-4 flex items-center justify-between shadow-md z-50">
+    render() {
+        this.element.innerHTML = `
             <div class="logo">
-                <img src="/images/logi.svg" alt="Logo de Cafe Club Tv" class="h-12 transition-transform duration-300 hover:scale-105">
+                <img src="images/logi.svg" alt="Logo de Cafe Club Tv">
             </div>
-            ${isInstallable ? `
-                <button class="bg-gradient-to-r from-red-800 via-red-600 to-gray-300 text-white rounded-full px-6 py-2 text-sm font-medium transition-transform duration-200 hover:scale-105 shadow-lg">
-                    <i class="fas fa-download mr-2"></i> Instalar CafeClubTV App
+            <div class="install-container">
+                <button id="install-button" class="install-button" style="display: none;">
+                    <i class="fas fa-download"></i> Instalar CafeClubTV App
                 </button>
-            ` : ''}
-        </header>
-    `;
+            </div>
+        `;
+        return this.element;
+    }
 
-    if (isInstallable) {
-        const installButton = header.querySelector('button');
-        installButton.addEventListener('click', () => {
-            // Lógica para instalar la PWA
-            console.log('Instalando CafeClubTV App');
+    setupInstallButton() {
+        let deferredPrompt;
+        const installButton = this.element.querySelector('#install-button');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                }
+                deferredPrompt = null;
+            }
+            installButton.style.display = 'none';
         });
     }
 }
