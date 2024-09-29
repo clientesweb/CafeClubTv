@@ -1,23 +1,72 @@
 export default function Sponsors() {
-    const sponsors = document.getElementById('sponsors');
-    const sponsorsData = [
-        { id: 1, name: 'Sponsor 1', logo: '/images/logo1.png' },
-        { id: 2, name: 'Sponsor 2', logo: '/images/logo2.png' },
-        { id: 3, name: 'Sponsor 3', logo: '/images/logo3.png' },
-        { id: 4, name: 'Sponsor 4', logo: '/images/logo4.png' },
-        { id: 5, name: 'Sponsor 5', logo: '/images/LOGO MONO COMICS NEGRO (1).png' },
-    ];
-
-    sponsors.innerHTML = `
-        <section class="my-12 bg-gradient-to-r from-red-800 via-gray-300 to-white p-6 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-bold mb-6 text-white">Nuestros Patrocinadores</h2>
-            <div class="flex items-center justify-around">
-                ${sponsorsData.map(sponsor => `
-                    <div class="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center p-2 transition-transform duration-300 hover:scale-110">
-                        <img src="${sponsor.logo}" alt="${sponsor.name}" class="max-w-full max-h-full object-contain">
-                    </div>
-                `).join('')}
+    return `
+        <section id="sponsors-section">
+            <div class="sponsors-slider">
+                <div class="sponsor-item"><img src="images/logo1.png" alt="Logo del patrocinador 1" loading="lazy"></div>
+                <div class="sponsor-item"><img src="images/logo2.png" alt="Logo del patrocinador 2" loading="lazy"></div>
+                <div class="sponsor-item"><img src="images/logo3.png" alt="Logo del patrocinador 3" loading="lazy"></div>
+                <div class="sponsor-item"><img src="images/logo4.png" alt="Logo del patrocinador 4" loading="lazy"></div>
+                <div class="sponsor-item"><img src="images/LOGO MONO COMICS NEGRO (1).png" alt="Logo del patrocinador 5" loading="lazy"></div>
             </div>
         </section>
     `;
 }
+
+Sponsors.init = () => {
+    const slider = document.querySelector('.sponsors-slider');
+    const items = slider.children;
+    const totalItems = items.length;
+    
+    // Clonar los primeros elementos para el efecto infinito
+    for (let i = 0; i < totalItems; i++) {
+        const clone = items[i].cloneNode(true);
+        slider.appendChild(clone);
+    }
+
+    let itemWidth = items[0].offsetWidth;
+    let totalWidth = itemWidth * totalItems;
+    slider.style.width = `${totalWidth * 2}px`;
+
+    let currentIndex = 0;
+    const transitionDuration = 2;
+    const slideInterval = 5000;
+    
+    slider.style.transition = `transform ${transitionDuration}s ease-in-out`;
+
+    const slideToNext = () => {
+        currentIndex++;
+        if (currentIndex >= totalItems) {
+            currentIndex = 0;
+            slider.style.transition = 'none';
+            slider.style.transform = `translateX(0px)`;
+            setTimeout(() => {
+                slider.style.transition = `transform ${transitionDuration}s ease-in-out`;
+                currentIndex = totalItems;
+                slider.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+            }, 20);
+        } else {
+            slider.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        }
+    };
+
+    setInterval(slideToNext, slideInterval);
+
+    slider.addEventListener('touchstart', (e) => {
+        const touchStartX = e.touches[0].clientX;
+        slider.addEventListener('touchmove', (e) => {
+            const touchMoveX = e.touches[0].clientX;
+            if (touchMoveX - touchStartX < -50) {
+                slideToNext();
+                slider.removeEventListener('touchmove', arguments.callee);
+            }
+        }, { passive: true });
+    }, { passive: true });
+
+    const updateItemWidth = () => {
+        itemWidth = items[0].offsetWidth;
+        totalWidth = itemWidth * totalItems;
+        slider.style.width = `${totalWidth * 2}px`;
+    };
+    window.addEventListener('resize', updateItemWidth);
+    updateItemWidth();
+};
