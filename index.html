@@ -3,31 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Club Tv</title>
-    <meta name="description" content="Descubre lo mejor en entretenimiento y servicios en línea con Cafe Club Tv.">
-    <link rel="icon" href="images/Icon512x512.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#ffffff">
-    <meta property="og:title" content="Cafe Club Tv">
-    <meta property="og:description" content="Descubre lo mejor en entretenimiento y servicios en línea con Cafe Club Tv.">
-    <meta property="og:image" content="https://tudominio.com/og-image.jpg">
-    <meta property="og:url" content="https://tudominio.com">
+    <title>CafeClubTV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div id="app"></div>
-    <script src="components/Header.js"></script>
-    <script src="components/Carousel.js"></script>
-    <script src="components/Playlists.js"></script>
-    <script src="components/Shorts.js"></script>
-    <script src="components/Sponsors.js"></script>
-    <script src="components/Counters.js"></script>
-    <script src="components/Footer.js"></script>
-    <script src="components/WhatsAppFloat.js"></script>
-    <script src="components/BottomNav.js"></script>
-    <script src="app.js"></script>
-    <script src="service-worker.js"></script>
+<body class="min-h-screen bg-gradient-to-br from-white to-gray-300 text-gray-800 font-sans">
+    <header id="header"></header>
+    <main class="container mx-auto px-4 py-8">
+        <div id="carousel"></div>
+        <div id="playlists"></div>
+        <div id="shorts"></div>
+        <div id="sponsors"></div>
+        <div id="counters"></div>
+    </main>
+    <footer id="footer"></footer>
+    <div id="whatsapp-float"></div>
+    <nav id="bottom-nav"></nav>
+
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
