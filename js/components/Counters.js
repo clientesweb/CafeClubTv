@@ -1,11 +1,14 @@
 export default function Counters() {
     const counters = document.getElementById('counters');
+    
+    // Inicialización de los contadores
     let counts = {
         visitas: 4870,
         descargas: 110,
         interacciones: 2340
     };
 
+    // Función para actualizar los contadores en el DOM
     function updateCounters() {
         counters.innerHTML = `
             <section class="my-12 bg-gray-200 bg-opacity-50 backdrop-blur-md p-6 rounded-lg shadow-lg">
@@ -22,9 +25,12 @@ export default function Counters() {
         `;
     }
 
+    // Llamada inicial para mostrar los contadores
     updateCounters();
 
+    // Intervalo para actualizar los contadores cada 5 segundos
     setInterval(() => {
+        // Actualización aleatoria de los contadores
         counts = {
             visitas: counts.visitas + Math.floor(Math.random() * 3),
             descargas: counts.descargas + Math.floor(Math.random() * 2),
