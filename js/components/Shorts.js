@@ -27,13 +27,14 @@ export default function Shorts() {
             const shortsContainer = document.getElementById('shorts-container');
             const shortsData = data.items;
 
+            // Verificar si hay shorts en la playlist
             if (shortsData.length === 0) {
                 shortsContainer.innerHTML = '<p>No shorts found in this playlist.</p>';
                 return;
             }
 
-            // Asegurarse de que se están mostrando los últimos 5 shorts
-            const latestShorts = shortsData.slice(0, 5).reverse(); // Invertir para mostrar los más recientes primero
+            // Los shorts ya vienen en el orden más reciente a menos reciente
+            const latestShorts = shortsData.slice(0, 5); // No es necesario invertir, ya que la API devuelve los más recientes
 
             shortsContainer.innerHTML = latestShorts.map(short => `
                 <div class="flex-none w-48 h-80 bg-gray-200 rounded-lg shadow-md overflow-hidden">
