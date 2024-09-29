@@ -19,3 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
     WhatsAppFloat();
     BottomNav();
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const preloader = document.getElementById('preloader');
+
+    // Simula la carga (puedes reemplazar esto con tu lógica de carga)
+    setTimeout(() => {
+        // Oculta el preloader una vez que el contenido está cargado
+        preloader.style.display = 'none';
+    }, 2000); // Ajusta el tiempo según tus necesidades
+});
