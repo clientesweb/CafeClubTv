@@ -9,6 +9,7 @@ import WhatsAppFloat from './components/WhatsAppFloat.js';
 import BottomNav from './components/BottomNav.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar los componentes
     Header();
     Carousel();
     Playlists();
@@ -18,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     Footer();
     WhatsAppFloat();
     BottomNav();
-});
-document.addEventListener("DOMContentLoaded", () => {
+
+    // Manejo del preloader
     const preloader = document.getElementById('preloader');
 
     // Simula la carga (puedes reemplazar esto con tu lógica de carga)
