@@ -1,14 +1,12 @@
-import './components/Header.js';
+import './components/Navigation.js';
+import './components/YouTubeShorts.js';
+import './components/SponsorsSlider.js';
 import './components/ImageCarousel.js';
 import './components/PlaylistSlider.js';
-import './components/ShortsSection.js';
-import './components/SponsorsSection.js';
-import './components/CountersSection.js';
 import './components/WhatsAppFloat.js';
-import './components/BottomNav.js';
-import './components/Footer.js';
+import './components/InstallButton.js';
+import './components/Counters.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicialización de la aplicación
     console.log('CafeClubTV app initialized');
 });
