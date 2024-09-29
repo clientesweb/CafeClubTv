@@ -1,52 +1,53 @@
 export default function WhatsAppFloat() {
-    const whatsappFloat = document.getElementById('whatsapp-float');
-
-    whatsappFloat.innerHTML = `
-        <div class="fixed bottom-20 right-6 z-50">
-            <button id="open-whatsapp-modal" class="bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition-colors">
-                <i class="fab fa-whatsapp text-2xl"></i>
-            </button>
+    return `
+        <div class="whatsapp-float">
+            <a href="javascript:void(0);" id="whatsappBtn" class="whatsapp-button" aria-label="Chatea con CaféClubTV en WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
-        <div id="whatsapp-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden">
-            <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
-                <h2 class="text-2xl font-bold mb-4 text-green-600">Chatea con CaféClubTV en WhatsApp</h2>
-                <textarea 
-                    id="whatsapp-message"
-                    placeholder="Escribe tu mensaje aquí..."
-                    class="w-full p-2 border border-gray-300 rounded mb-4 h-32"
-                ></textarea>
-                <div class="flex justify-end space-x-2">
-                    <button id="close-whatsapp-modal" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors">Cancelar</button>
-                    <button id="send-whatsapp-message" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">Enviar mensaje</button>
-                </div>
+        <div id="whatsappModal" class="whatsapp-modal">
+            <div class="whatsapp-modal-content">
+                <button class="whatsapp-close" aria-label="Cerrar modal">&times;</button>
+                <h2>Chatea con CaféClubTV en WhatsApp</h2>
+                <p>Escribe tu mensaje:</p>
+                <textarea id="whatsappMessage" placeholder="Escribe tu mensaje aquí..." rows="4" style="width: 100%;"></textarea>
+                <button id="sendMessageBtn" class="send-btn">Enviar mensaje</button>
             </div>
         </div>
     `;
+}
 
-    const openModalButton = document.getElementById('open-whatsapp-modal');
-    const closeModalButton = document.getElementById('close-whatsapp-modal');
-    const sendMessageButton = document.getElementById('send-whatsapp-message');
-    const modal = document.getElementById('whatsapp-modal');
-    const messageTextarea = document.getElementById('whatsapp-message');
+WhatsAppFloat.init = () => {
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const whatsappModal = document.getElementById('whatsappModal');
+    const whatsappClose = document.querySelector('.whatsapp-close');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    const whatsappMessage = document.getElementById('whatsappMessage');
 
-    openModalButton.addEventListener('click', () => {
-        modal.classList.remove('hidden');
+    whatsappBtn.addEventListener('click', function() {
+        whatsappModal.classList.add('show');
     });
 
-    closeModalButton.addEventListener('click', () => {
-        modal.classList.add('hidden');
+    whatsappClose.addEventListener('click', function() {
+        whatsappModal.classList.remove('show');
     });
 
-    sendMessageButton.addEventListener('click', () => {
-        const message = messageTextarea.value.trim();
+    sendMessageBtn.addEventListener('click', function() {
+        const message = whatsappMessage.value.trim();
         if (message) {
             const phoneNumber = '+593978606269';
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
-            messageTextarea.value = '';
-            modal.classList.add('hidden');
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+            whatsappModal.classList.remove('show');
+            whatsappMessage.value = '';
         } else {
             alert('Por favor, escribe un mensaje antes de enviar.');
         }
     });
-}
+
+    window.addEventListener('click', function(event) {
+        if (event.target == whatsappModal) {
+            whatsappModal.classList.remove('show');
+        }
+    });
+};
