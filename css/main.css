@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import 'components/header.css';
 @import 'components/carousel.css';
 @import 'components/playlists.css';
@@ -8,4 +9,59 @@
 @import 'components/whatsapp-float.css';
 @import 'components/bottom-nav.css';
 
-/* Estilos globales adicionales si son necesarios */
+:root {
+  --primary-gradient: linear-gradient(135deg, #8B0000, #D3D3D3, #FFFFFF);
+  --secondary-gradient: linear-gradient(135deg, #8B0000, #D3D3D3);
+  --accent-color: #8B0000;
+  --text-color: #333333;
+  --text-color-dark: #1F2937;
+  --button-gradient: linear-gradient(to right, #8B0000, #A52A2A, #D3D3D3);
+  --background-gradient: linear-gradient(to bottom right, #FFFFFF, #D3D3D3);
+}
+
+body {
+    background: var(--background-gradient);
+    color: var(--text-color);
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background: rgba(211, 211, 211, 0.8);
+    backdrop-filter: blur(15px);
+    padding: 60px 2%;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.large-container {
+    padding: 0 5%;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media (min-width: 600px) {
+    /* Estilos para pantallas medianas */
+}
+
+@media (min-width: 900px) {
+    /* Estilos para pantallas grandes */
+}
