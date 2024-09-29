@@ -1,49 +1,32 @@
 export default function Header() {
-    return `
-        <header>
+    const header = document.getElementById('header');
+    
+    function checkInstallable() {
+        const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
+        const isInstagram = /Instagram/.test(navigator.userAgent);
+        return !isInstalled || isInstagram;
+    }
+
+    const isInstallable = checkInstallable();
+
+    header.innerHTML = `
+        <header class="bg-gray-200 bg-opacity-80 backdrop-blur-md text-gray-800 p-4 flex items-center justify-between shadow-md z-50">
             <div class="logo">
-                <img src="images/logi.svg" alt="Logo de Cafe Club Tv">
+                <img src="/images/logi.svg" alt="Logo de Cafe Club Tv" class="h-12 transition-transform duration-300 hover:scale-105">
             </div>
-            <div class="install-container">
-                <button id="install-button" class="install-button" style="display: none;">
-                    <i class="fas fa-download"></i> Instalar CafeClubTV App
+            ${isInstallable ? `
+                <button class="bg-gradient-to-r from-red-800 via-red-600 to-gray-300 text-white rounded-full px-6 py-2 text-sm font-medium transition-transform duration-200 hover:scale-105 shadow-lg">
+                    <i class="fas fa-download mr-2"></i> Instalar CafeClubTV App
                 </button>
-            </div>
+            ` : ''}
         </header>
     `;
-}
 
-// Lógica para el botón de instalación
-document.addEventListener('DOMContentLoaded', () => {
-    let deferredPrompt;
-    const installButton = document.getElementById('install-button');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        installButton.style.display = 'block';
-    });
-
-    installButton.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                console.log('User accepted the install prompt');
-            }
-            deferredPrompt = null;
-        }
-        installButton.style.display = 'none';
-    });
-
-    // Verifica si la app ya está instalada
-    const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
-
-    // Verifica si se accede desde Instagram
-    const isInstagram = /Instagram/.test(navigator.userAgent);
-
-    // Muestra el botón si no está instalada y se accede desde Instagram
-    if (!isInstalled || isInstagram) {
-        installButton.style.display = 'block';
+    if (isInstallable) {
+        const installButton = header.querySelector('button');
+        installButton.addEventListener('click', () => {
+            // Lógica para instalar la PWA
+            console.log('Instalando CafeClubTV App');
+        });
     }
-});
+}
