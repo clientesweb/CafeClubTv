@@ -1,8 +1,8 @@
 export default function Carousel() {
     const carousel = document.getElementById('carousel');
     const images = [
-        '../images/image1.jpg',
-        '../images/image2 (1).jpg',
+        '../images/image1.jpg',  // Correcto: retroceder un nivel para acceder a /images/
+        '../images/image2 (1).jpg', // Considera renombrar esta imagen
         '../images/image3.jpg',
         '../images/image4.jpg',
         '../images/image5.jpg',
