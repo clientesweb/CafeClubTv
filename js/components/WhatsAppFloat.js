@@ -14,7 +14,7 @@ export default function WhatsAppFloat() {
                     <textarea 
                         id="whatsapp-message"
                         placeholder="Escribe tu mensaje aquí..."
-                        class="w-full p-2 border border-gray-300 rounded mb-4 h-32"
+                        class="w-full p-2 border border-gray-300 rounded mb-4 h-32 resize-none"
                     ></textarea>
                     <div class="flex justify-end space-x-2">
                         <button id="close-whatsapp-modal" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors">Cancelar</button>
