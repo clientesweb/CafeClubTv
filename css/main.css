@@ -1,11 +1,13 @@
-@import 'components/header.css';
-@import 'components/carousel.css';
-@import 'components/playlists.css';
-@import 'components/shorts.css';
-@import 'components/sponsors.css';
-@import 'components/counters.css';
-@import 'components/footer.css';
-@import 'components/whatsapp-float.css';
-@import 'components/bottom-nav.css';
-
-/* Estilos globales adicionales si son necesarios */
+/* styles/main.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import 'variables.css';
+@import 'global.css';
+@import 'header.css';
+@import 'footer.css';
+@import 'carousel.css';
+@import 'playlists.css';
+@import 'shorts.css';
+@import 'sponsors.css';
+@import 'whatsapp-float.css';
+@import 'bottom-nav.css';
+@import 'counters.css';
