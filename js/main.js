@@ -7,6 +7,7 @@ import Counters from './components/Counters.js';
 import Footer from './components/Footer.js';
 import WhatsAppFloat from './components/WhatsAppFloat.js';
 import BottomNav from './components/BottomNav.js';
+import Roulette from './components/Roulette.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Inicializar los componentes
