@@ -1,4 +1,3 @@
-// js/components/Roulette.js
 class Roulette extends HTMLElement {
     constructor() {
         super();
@@ -9,8 +8,8 @@ class Roulette extends HTMLElement {
             { label: '$50', probability: 0.05, value: 50 },
             { label: 'Intenta de nuevo', probability: 0.65, value: 0 }
         ];
-        this.segments = 12; // Número total de segmentos en la ruleta
-        this.isRigged = false; // Controla si la ruleta está arreglada para no ganar
+        this.segments = 12;
+        this.isRigged = false;
     }
 
     connectedCallback() {
@@ -21,7 +20,70 @@ class Roulette extends HTMLElement {
     render() {
         const style = document.createElement('style');
         style.textContent = `
-            @import url('css/components/Roulette.css');
+            .roulette-container {
+                width: 300px;
+                height: 300px;
+                position: relative;
+                margin: 0 auto;
+            }
+            .roulette-wheel {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: #f0f0f0;
+                position: relative;
+                overflow: hidden;
+                transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            }
+            .roulette-segment {
+                position: absolute;
+                width: 50%;
+                height: 50%;
+                transform-origin: bottom right;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                color: white;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            }
+            .roulette-segment:nth-child(odd) {
+                background: #ff6b6b;
+            }
+            .roulette-segment:nth-child(even) {
+                background: #4ecdc4;
+            }
+            .roulette-arrow {
+                width: 0;
+                height: 0;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-top: 20px solid #333;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+            }
+            #spin-button {
+                margin-top: 20px;
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            #spin-button:disabled {
+                background-color: #cccccc;
+                cursor: not-allowed;
+            }
+            #result {
+                margin-top: 20px;
+                font-size: 18px;
+                font-weight: bold;
+            }
         `;
 
         this.shadowRoot.innerHTML = `
@@ -38,16 +100,11 @@ class Roulette extends HTMLElement {
     }
 
     createSegments() {
-        let segmentsHTML = '';
-        for (let i = 0; i < this.segments; i++) {
-            const prize = this.prizes[i % this.prizes.length];
-            segmentsHTML += `
-                <div class="roulette-segment" style="--i:${i};">
-                    <span>${prize.label}</span>
-                </div>
-            `;
-        }
-        return segmentsHTML;
+        return this.prizes.map((prize, index) => `
+            <div class="roulette-segment" style="transform: rotate(${index * (360 / this.prizes.length)}deg) skew(${90 - (360 / this.prizes.length)}deg);">
+                <span style="transform: skew(${-90 + (360 / this.prizes.length)}deg) rotate(${(360 / this.prizes.length) / 2}deg);">${prize.label}</span>
+            </div>
+        `).join('');
     }
 
     setupEventListeners() {
@@ -63,20 +120,14 @@ class Roulette extends HTMLElement {
         spinButton.disabled = true;
         result.textContent = '';
 
-        let prize;
-        if (this.isRigged) {
-            prize = this.prizes.find(p => p.value === 0);
-        } else {
-            prize = this.getRandomPrize();
-        }
+        const prize = this.isRigged ? this.prizes.find(p => p.value === 0) : this.getRandomPrize();
 
-        const segmentAngle = 360 / this.segments;
         const prizeIndex = this.prizes.indexOf(prize);
-        const rotations = 5; // Número de rotaciones completas
+        const rotations = 5;
+        const segmentAngle = 360 / this.prizes.length;
         const extraAngle = Math.floor(Math.random() * segmentAngle);
         const totalAngle = rotations * 360 + prizeIndex * segmentAngle + extraAngle;
 
-        wheel.style.transition = 'transform 5s cubic-bezier(0.25, 0.1, 0.25, 1)';
         wheel.style.transform = `rotate(${totalAngle}deg)`;
 
         setTimeout(() => {
@@ -97,10 +148,18 @@ class Roulette extends HTMLElement {
         return this.prizes[this.prizes.length - 1];
     }
 
-    // Método público para controlar si la ruleta está arreglada
     setRigged(rigged) {
         this.isRigged = rigged;
     }
 }
 
 customElements.define('roulette-component', Roulette);
+
+export default function(element) {
+    if (!element) {
+        console.error('Element not found for Roulette component');
+        return;
+    }
+    const roulette = document.createElement('roulette-component');
+    element.appendChild(roulette);
+}
