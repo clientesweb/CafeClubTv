@@ -9,24 +9,57 @@ import WhatsAppFloat from './components/WhatsAppFloat.js';
 import BottomNav from './components/BottomNav.js';
 import Roulette from './components/Roulette.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar los componentes
-    Header();
-    Carousel();
-    Playlists();
-    Shorts();
-    Sponsors();
-    Counters();
-    Footer();
-    WhatsAppFloat();
-    BottomNav();
+// Función para cargar un componente de forma asíncrona
+const loadComponent = async (component, elementId) => {
+  try {
+    await component();
+    console.log(`${elementId} cargado correctamente`);
+  } catch (error) {
+    console.error(`Error al cargar ${elementId}:`, error);
+  }
+};
 
-    // Manejo del preloader
-    const preloader = document.getElementById('preloader');
+// Función para ocultar el preloader
+const hidePreloader = () => {
+  const preloader = document.getElementById('preloader');
+  preloader.style.opacity = '0';
+  setTimeout(() => {
+    preloader.style.display = 'none';
+  }, 500); // Transición suave
+};
 
-    // Simula la carga (puedes reemplazar esto con tu lógica de carga)
-    setTimeout(() => {
-        // Oculta el preloader una vez que el contenido está cargado
-        preloader.style.display = 'none';
-    }, 2000); // Ajusta el tiempo según tus necesidades
+document.addEventListener('DOMContentLoaded', async () => {
+  const componentsToLoad = [
+    { component: Header, id: 'header' },
+    { component: Carousel, id: 'carousel' },
+    { component: Playlists, id: 'playlists' },
+    { component: Shorts, id: 'shorts' },
+    { component: Sponsors, id: 'sponsors' },
+    { component: Counters, id: 'counters' },
+    { component: Footer, id: 'footer' },
+    { component: WhatsAppFloat, id: 'whatsapp-float' },
+    { component: BottomNav, id: 'bottom-nav' },
+    { component: Roulette, id: 'roulette' }
+  ];
+
+  try {
+    // Cargar todos los componentes de forma asíncrona
+    await Promise.all(componentsToLoad.map(({ component, id }) => loadComponent(component, id)));
+    
+    // Esperar a que las imágenes se carguen
+    await new Promise(resolve => {
+      if (document.readyState === 'complete') {
+        resolve();
+      } else {
+        window.addEventListener('load', resolve);
+      }
+    });
+
+    // Ocultar el preloader una vez que todo esté cargado
+    hidePreloader();
+  } catch (error) {
+    console.error('Error durante la carga de la página:', error);
+    // Asegurarse de que el preloader se oculte incluso si hay un error
+    hidePreloader();
+  }
 });
