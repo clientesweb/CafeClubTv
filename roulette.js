@@ -28,9 +28,12 @@ const tabContents = document.querySelectorAll('.tab-content');
 prizes.forEach((prize, index) => {
     const slice = document.createElement('div');
     slice.className = 'prize';
-    slice.style.transform = `rotate(${index * 45}deg)`;
+    slice.style.transform = `rotate(${index * 45}deg) skew(45deg)`;
     slice.style.backgroundColor = prize.color;
-    slice.innerHTML = `<span style="transform: rotate(${-index * 45}deg)">${prize.name}</span>`;
+    const textSpan = document.createElement('span');
+    textSpan.style.transform = 'skew(-45deg) rotate(22.5deg)';
+    textSpan.textContent = prize.name;
+    slice.appendChild(textSpan);
     wheel.appendChild(slice);
 });
 
@@ -45,6 +48,7 @@ function spinWheel() {
     spinButton.disabled = true;
     stopButton.disabled = false;
     resultDiv.textContent = '';
+    resultDiv.className = '';
 
     if (participationMethod === 'direct') {
         balance -= 1;
@@ -53,6 +57,7 @@ function spinWheel() {
 
     const spins = Math.floor(5 + Math.random() * 5);
     const degrees = spins * 360 + Math.floor(Math.random() * 360);
+    wheel.style.transition = 'transform 5s cubic-bezier(0.25, 0.1, 0.25, 1)';
     wheel.style.transform = `rotate(${degrees}deg)`;
 
     setTimeout(() => {
@@ -71,11 +76,12 @@ function stopWheel() {
     const prizeIndex = Math.floor(((360 - (actualRotation % 360)) % 360) / 45);
     const prize = prizes[prizeIndex];
 
-    resultDiv.textContent = prize.name === 'Sigue participando' 
-        ? '¡Sigue participando!' 
-        : `¡Ganaste ${prize.name}!`;
-
-    if (prize.name !== 'Sigue participando') {
+    if (prize.name === 'Sigue participando') {
+        resultDiv.textContent = '¡Sigue participando!';
+        resultDiv.className = 'lose';
+    } else {
+        resultDiv.textContent = `¡Ganaste ${prize.name}!`;
+        resultDiv.className = 'win';
         const claimButton = document.createElement('button');
         claimButton.textContent = 'Reclamar Premio';
         claimButton.className = 'button';
