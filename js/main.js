@@ -43,7 +43,6 @@ const initApp = async () => {
     } catch (error) {
         console.error('Error durante la inicialización de la aplicación:', error);
     } finally {
-        // Asegurarse de que el preloader se oculte incluso si hay errores
         const preloader = document.getElementById('preloader');
         if (preloader) {
             preloader.style.opacity = '0';
@@ -54,7 +53,6 @@ const initApp = async () => {
     }
 };
 
-// Iniciar la aplicación cuando el DOM esté listo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
