@@ -24,15 +24,27 @@ const tabContents = document.querySelectorAll('.tab-content');
 // Crear la ruleta
 function createWheel() {
     wheel.innerHTML = '';
+    const totalDegrees = 360;
+    const pieceAngle = totalDegrees / prizes.length;
     prizes.forEach((prize, index) => {
         const slice = document.createElement('div');
         slice.className = 'prize';
-        slice.style.transform = `rotate(${index * (360 / prizes.length)}deg) skew(${90 - (360 / prizes.length)}deg)`;
+        slice.style.transform = `rotate(${index * pieceAngle}deg) skew(${90 - pieceAngle}deg)`;
         slice.style.backgroundColor = prize.color;
-        const textSpan = document.createElement('span');
-        textSpan.style.transform = `skew(${(360 / prizes.length) - 90}deg) rotate(${(360 / prizes.length) / 2}deg)`;
-        textSpan.textContent = prize.name;
-        slice.appendChild(textSpan);
+        
+        const textElement = document.createElement('p');
+        textElement.textContent = prize.name;
+        textElement.style.transform = `skew(${pieceAngle - 90}deg) rotate(${pieceAngle / 2}deg)`;
+        textElement.style.transformOrigin = 'center center';
+        textElement.style.textAlign = 'right';
+        textElement.style.paddingRight = '20px';
+        textElement.style.width = '100%';
+        textElement.style.height = '100%';
+        textElement.style.display = 'flex';
+        textElement.style.alignItems = 'center';
+        textElement.style.justifyContent = 'flex-end';
+        
+        slice.appendChild(textElement);
         wheel.appendChild(slice);
     });
 }
@@ -76,7 +88,7 @@ function stopWheel(degrees) {
     if (prize.name === 'Sigue participando') {
         showResult('¡Sigue participando!', 'lose');
     } else {
-        showResult(`¡Ganaste ${prize.name}!`, 'win');
+        showResult(`¡Ganaste ${prize.name}!`,   'win');
         currentPrize = parseInt(prize.name.slice(1));
         
         const claimButton = createButton('Reclamar Premio', claimPrize);
@@ -95,7 +107,7 @@ function showResult(message, className) {
 function createButton(text, onClick) {
     const button = document.createElement('button');
     button.textContent = text;
-    button.className = 'button  fade-in';
+    button.className = 'button fade-in';
     button.onclick = onClick;
     return button;
 }
@@ -127,6 +139,14 @@ function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.textContent = message;
     notification.className = `notification ${type} fade-in`;
+    notification.style.position = 'fixed';
+    notification.style.top = '20px';
+    notification.style.right = '20px';
+    notification.style.padding = '10px 20px';
+    notification.style.borderRadius = '5px';
+    notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
+    notification.style.color = 'white';
+    notification.style.zIndex = '1000';
     document.body.appendChild(notification);
     setTimeout(() => {
         notification.remove();
