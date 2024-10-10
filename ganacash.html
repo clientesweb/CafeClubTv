@@ -4,41 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CafeClubTV - Ruleta Gana Cash</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --burgundy: #800020;
-            --light-gray: #D3D3D3;
+            --light-gray: #F0F0F0;
             --gold: #FFD700;
+            --primary-text: #333333;
+            --secondary-text: #666666;
         }
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--light-gray);
-            color: #333;
+        * {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--primary-text);
+            line-height: 1.6;
         }
         .container {
-            background-color: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.2);
-            padding: 30px;
-            max-width: 800px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--burgundy);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
         }
         h1 {
-            color: var(--burgundy);
-            text-align: center;
             font-size: 2.5em;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .logo {
-            display: block;
-            margin: 0 auto 20px;
             max-width: 200px;
+            margin-bottom: 20px;
         }
         .tabs {
             display: flex;
@@ -53,7 +57,7 @@
             transition: all 0.3s ease;
             font-size: 1em;
             font-weight: bold;
-            color: #333;
+            color: var(--primary-text);
         }
         .tab:first-child {
             border-top-left-radius: 20px;
@@ -87,6 +91,7 @@
             border-radius: 50%;
             transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
         .wheel-center {
             position: absolute;
@@ -173,6 +178,22 @@
             background-color: #f44336;
             color: white;
         }
+        .slider {
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px 0;
+            background-color: var(--light-gray);
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .slider-content {
+            display: inline-block;
+            animation: slide 20s linear infinite;
+        }
+        .slider-item {
+            display: inline-block;
+            margin: 0 20px;
+        }
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -182,33 +203,101 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .wheel-container {
+                width: 250px;
+                height: 250px;
+            }
+            .button {
+                width: 150px;
+                font-size: 0.9em;
+            }
+        }
+        @media (max-width: 480px) {
+            .wheel-container {
+                width: 200px;
+                height: 200px;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .tab {
+                border-radius: 20px;
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <header>
         <img src="logo.png" alt="CafeClubTV Logo" class="logo">
         <h1>Ruleta Gana Cash</h1>
-        <div class="tabs">
+    </header>
+    <div class="container">
+        <!-- Banner superior -->
+        <div class="slider fade-in">
+            <div class="slider-content">
+                <span class="slider-item">¡Juega responsablemente!</span>
+                <span class="slider-item">Recuerda: es solo un juego.</span>
+                <span class="slider-item">La suerte puede cambiar en cualquier momento.</span>
+            </div>
+        </div>
+
+        <div class="tabs fade-in">
             <button class="tab active" data-tab="views">Por Visualizaciones</button>
             <button class="tab" data-tab="direct">Por Pago Directo</button>
         </div>
-        <div id="viewsContent" class="tab-content active">
+        <div id="viewsContent" class="tab-content active fade-in">
             <p>Participa viendo videos y haciendo clic en llamados a la acción</p>
         </div>
-        <div id="directContent" class="tab-content">
+        <div id="directContent" class="tab-content fade-in">
             <p>Saldo actual: $<span id="balance">0</span></p>
-            <button id="addFunds" class="button">Agregar $1 al Saldo</button>
+            <div id="paypal-button-container"></div>
         </div>
-        <div class="wheel-container">
+        <div class="wheel-container fade-in">
             <div class="wheel" id="wheel"></div>
             <div class="wheel-center">Girar</div>
             <div class="marker"></div>
         </div>
-        <button id="spinButton" class="button">Girar</button>
-        <button id="stopButton" class="button" disabled>Parar</button>
-        <div id="result"></div>
+        <button id="spinButton" class="button fade-in">Girar</button>
+        <div id="result" class="fade-in"></div>
+
+        <!-- Slider de anuncios -->
+        <div class="slider fade-in">
+            <div class="slider-content">
+                <img src="ad1.jpg" alt="Anuncio 1" class="slider-item">
+                <img src="ad2.jpg" alt="Anuncio 2" class="slider-item">
+                <img src="ad3.jpg" alt="Anuncio 3" class="slider-item">
+            </div>
+        </div>
+
+        <!-- Slider de patrocinadores -->
+        <div class="slider fade-in">
+            <div class="slider-content">
+                <img src="sponsor1.png" alt="Patrocinador 1" class="slider-item">
+                <img src="sponsor2.png" alt="Patrocinador 2" class="slider-item">
+                <img src="sponsor3.png" alt="Patrocinador 3" class="slider-item">
+            </div>
+        </div>
     </div>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="roulette.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+    <script src="script.js"></script>
 </body>
 </html>
