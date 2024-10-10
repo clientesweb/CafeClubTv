@@ -1,5 +1,3 @@
-const stripe = Stripe('pk_test_YOUR_STRIPE_PUBLISHABLE_KEY');
-
 const prizes = [
     { name: '$1', color: '#FFB3BA' },
     { name: '$1', color: '#BAFFC9' },
@@ -14,39 +12,41 @@ const prizes = [
 let spinning = false;
 let balance = 0;
 let participationMethod = 'views';
+let currentPrize = null;
 
 const wheel = document.getElementById('wheel');
 const spinButton = document.getElementById('spinButton');
-const stopButton = document.getElementById('stopButton');
 const resultDiv = document.getElementById('result');
 const balanceSpan = document.getElementById('balance');
-const addFundsButton = document.getElementById('addFunds');
 const tabs = document.querySelectorAll('.tab');
 const tabContents = document.querySelectorAll('.tab-content');
 
 // Crear la ruleta
-prizes.forEach((prize, index) => {
-    const slice = document.createElement('div');
-    slice.className = 'prize';
-    slice.style.transform = `rotate(${index * 45}deg) skew(45deg)`;
-    slice.style.backgroundColor = prize.color;
-    const textSpan = document.createElement('span');
-    textSpan.style.transform = 'skew(-45deg) rotate(22.5deg)';
-    textSpan.textContent = prize.name;
-    slice.appendChild(textSpan);
-    wheel.appendChild(slice);
-});
+function createWheel() {
+    wheel.innerHTML = '';
+    prizes.forEach((prize, index) => {
+        const slice = document.createElement('div');
+        slice.className = 'prize';
+        slice.style.transform = `rotate(${index * (360 / prizes.length)}deg) skew(${90 - (360 / prizes.length)}deg)`;
+        slice.style.backgroundColor = prize.color;
+        const textSpan = document.createElement('span');
+        textSpan.style.transform = `skew(${(360 / prizes.length) - 90}deg) rotate(${(360 / prizes.length) / 2}deg)`;
+        textSpan.textContent = prize.name;
+        slice.appendChild(textSpan);
+        wheel.appendChild(slice);
+    });
+}
 
 // Funciones de la ruleta
 function spinWheel() {
+    if (spinning) return;
     if (participationMethod === 'direct' && balance < 1) {
-        alert('Saldo insuficiente. Por favor, agrega fondos.');
+        showNotification('Saldo insuficiente. Por favor, agrega fondos.', 'error');
         return;
     }
 
     spinning = true;
     spinButton.disabled = true;
-    stopButton.disabled = false;
     resultDiv.textContent = '';
     resultDiv.className = '';
 
@@ -61,74 +61,80 @@ function spinWheel() {
     wheel.style.transform = `rotate(${degrees}deg)`;
 
     setTimeout(() => {
-        if (spinning) {
-            stopWheel();
-        }
+        stopWheel(degrees);
     }, 5000);
 }
 
-function stopWheel() {
+function stopWheel(degrees) {
     spinning = false;
     spinButton.disabled = false;
-    stopButton.disabled = true;
 
-    const actualRotation = getRotationDegrees(wheel);
-    const prizeIndex = Math.floor(((360 - (actualRotation % 360)) % 360) / 45);
+    const actualRotation = degrees % 360;
+    const prizeIndex = Math.floor(((360 - actualRotation) % 360) / (360 / prizes.length));
     const prize = prizes[prizeIndex];
 
     if (prize.name === 'Sigue participando') {
-        resultDiv.textContent = '¡Sigue participando!';
-        resultDiv.className = 'lose';
+        showResult('¡Sigue participando!', 'lose');
     } else {
-        resultDiv.textContent = `¡Ganaste ${prize.name}!`;
-        resultDiv.className = 'win';
-        const claimButton = document.createElement('button');
-        claimButton.textContent = 'Reclamar Premio';
-        claimButton.className = 'button';
-        claimButton.onclick = () => handlePayment(parseInt(prize.name.slice(1)));
+        showResult(`¡Ganaste ${prize.name}!`, 'win');
+        currentPrize = parseInt(prize.name.slice(1));
+        
+        const claimButton = createButton('Reclamar Premio', claimPrize);
+        const doubleButton = createButton('Duplicar', doublePrize);
+        
         resultDiv.appendChild(claimButton);
+        resultDiv.appendChild(doubleButton);
     }
 }
 
-function getRotationDegrees(element) {
-    const style = window.getComputedStyle(element);
-    const matrix = new WebKitCSSMatrix(style.transform);
-    return Math.round(Math.atan2(matrix.m12, matrix.m11) * (180/Math.PI));
+function showResult(message, className) {
+    resultDiv.textContent = message;
+    resultDiv.className = className + ' fade-in';
+}
+
+function createButton(text, onClick) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.className = 'button  fade-in';
+    button.onclick = onClick;
+    return button;
+}
+
+function claimPrize() {
+    balance += currentPrize;
+    updateBalance();
+    currentPrize = null;
+    showNotification('¡Premio reclamado!', 'success');
+    clearResult();
+}
+
+function doublePrize() {
+    currentPrize = null;
+    clearResult();
+    spinWheel();
+}
+
+function clearResult() {
+    resultDiv.textContent = '';
+    resultDiv.className = '';
 }
 
 function updateBalance() {
     balanceSpan.textContent = balance;
 }
 
-async function handlePayment(amount) {
-    try {
-        const response = await fetch('/create-checkout-session', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ amount: amount * 100 }),
-        });
-        const session = await response.json();
-        const result = await stripe.redirectToCheckout({
-            sessionId: session.id,
-        });
-        if (result.error) {
-            alert(result.error.message);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Hubo un error al procesar el pago. Por favor, inténtalo de nuevo.');
-    }
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.className = `notification ${type} fade-in`;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
 }
 
 // Event Listeners
 spinButton.addEventListener('click', spinWheel);
-stopButton.addEventListener('click', stopWheel);
-addFundsButton.addEventListener('click', () => {
-    balance += 1;
-    updateBalance();
-});
 
 tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -140,5 +146,26 @@ tabs.forEach(tab => {
     });
 });
 
+// PayPal
+paypal.Buttons({
+    createOrder: function(data, actions) {
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: '1.00'
+                }
+            }]
+        });
+    },
+    onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+            balance += 1;
+            updateBalance();
+            showNotification('Transacción completada por ' + details.payer.name.given_name, 'success');
+        });
+    }
+}).render('#paypal-button-container');
+
 // Inicialización
+createWheel();
 updateBalance();
