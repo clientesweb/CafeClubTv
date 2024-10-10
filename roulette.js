@@ -32,17 +32,9 @@ function createWheel() {
         slice.style.transform = `rotate(${index * pieceAngle}deg) skew(${90 - pieceAngle}deg)`;
         slice.style.backgroundColor = prize.color;
         
-        const textElement = document.createElement('p');
+        const textElement = document.createElement('span');
         textElement.textContent = prize.name;
         textElement.style.transform = `skew(${pieceAngle - 90}deg) rotate(${pieceAngle / 2}deg)`;
-        textElement.style.transformOrigin = 'center center';
-        textElement.style.textAlign = 'right';
-        textElement.style.paddingRight = '20px';
-        textElement.style.width = '100%';
-        textElement.style.height = '100%';
-        textElement.style.display = 'flex';
-        textElement.style.alignItems = 'center';
-        textElement.style.justifyContent = 'flex-end';
         
         slice.appendChild(textElement);
         wheel.appendChild(slice);
@@ -67,14 +59,14 @@ function spinWheel() {
         updateBalance();
     }
 
-    const spins = Math.floor(5 + Math.random() * 5);
+    const spins = 5 + Math.random() * 5;
     const degrees = spins * 360 + Math.floor(Math.random() * 360);
-    wheel.style.transition = 'transform 5s cubic-bezier(0.25, 0.1, 0.25, 1)';
+    wheel.style.transition = `transform ${spins}s cubic-bezier(0.25, 0.1, 0.25, 1)`;
     wheel.style.transform = `rotate(${degrees}deg)`;
 
     setTimeout(() => {
         stopWheel(degrees);
-    }, 5000);
+    }, spins * 1000);
 }
 
 function stopWheel(degrees) {
@@ -82,13 +74,13 @@ function stopWheel(degrees) {
     spinButton.disabled = false;
 
     const actualRotation = degrees % 360;
-    const prizeIndex = Math.floor(((360 - actualRotation) % 360) / (360 / prizes.length));
+    const prizeIndex = Math.floor(((360 - actualRotation) % 360) / (360  / prizes.length));
     const prize = prizes[prizeIndex];
 
     if (prize.name === 'Sigue participando') {
         showResult('¡Sigue participando!', 'lose');
     } else {
-        showResult(`¡Ganaste ${prize.name}!`,   'win');
+        showResult(`¡Ganaste ${prize.name}!`, 'win');
         currentPrize = parseInt(prize.name.slice(1));
         
         const claimButton = createButton('Reclamar Premio', claimPrize);
