@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM fully loaded and parsed");
-
     const prizes = [
         { name: '$1', color: '#FF69B4' },
         { name: '$1', color: '#4169E1' },
@@ -12,13 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Sigue participando', color: '#FFD700' }
     ];
 
+    let spinning = false;
+    const wheel = document.getElementById('wheel');
+    const spinButton = document.getElementById('spinButton');
+    const resultDiv = document.getElementById('result');
+
     function createWheel() {
-        console.log("Creating wheel");
-        const wheel = document.getElementById('wheel');
-        if (!wheel) {
-            console.error("Wheel element not found");
-            return;
-        }
         wheel.innerHTML = '';
         const totalDegrees = 360;
         const pieceAngle = totalDegrees / prizes.length;
@@ -56,8 +53,23 @@ document.addEventListener('DOMContentLoaded', function() {
             text.textContent = prize.name;
             wheel.appendChild(text);
         });
-        console.log("Wheel created");
     }
 
-    createWheel();
-});
+    function spinWheel() {
+        if (spinning) return;
+        spinning = true;
+        spinButton.disabled = true;
+        resultDiv.textContent = '';
+        resultDiv.className = '';
+
+        const spins = 5 + Math.random() * 5;
+        const degrees = spins * 360 + Math.floor(Math.random() * 360);
+        wheel.style.transition = `transform ${spins}s cubic-bezier(0.25, 0.1, 0.25, 1)`;
+        wheel.style.transform = `rotate(${degrees}deg)`;
+
+        setTimeout(() => {
+            stopWheel(degrees);
+        }, spins * 1000);
+    }
+
+    function stopWh
