@@ -21,6 +21,7 @@ const balanceSpan = document.getElementById('balance');
 const tabs = document.querySelectorAll('.tab');
 const tabContents = document.querySelectorAll('.tab-content');
 
+// Crear la ruleta
 function createWheel() {
     wheel.innerHTML = '';
     const totalDegrees = 360;
@@ -55,7 +56,6 @@ function createWheel() {
         text.setAttribute('text-anchor', 'middle');
         text.setAttribute('fill', 'white');
         text.setAttribute('font-size', '4');
-        text.setAttribute('font-weight', 'bold');
         text.setAttribute('transform', `rotate(${textAngle}, ${textX}, ${textY})`);
         text.textContent = prize.name;
         wheel.appendChild(text);
@@ -73,7 +73,7 @@ function createWheel() {
 
     // Add white dots on the border
     for (let i = 0; i < prizes.length; i++) {
-        const dot =   document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         const angle = i * pieceAngle;
         const dotX = 50 + 49 * Math.cos(Math.PI * angle / 180);
         const dotY = 50 + 49 * Math.sin(Math.PI * angle / 180);
@@ -88,11 +88,13 @@ function createWheel() {
     const center = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     center.setAttribute('cx', '50');
     center.setAttribute('cy', '50');
+    
     center.setAttribute('r', '5');
     center.setAttribute('fill', '#800080');
     wheel.appendChild(center);
 }
 
+// Funciones de la ruleta
 function spinWheel() {
     if (spinning) return;
     if (participationMethod === 'direct' && balance < 1) {
@@ -125,7 +127,7 @@ function stopWheel(degrees) {
     spinButton.disabled = false;
 
     const actualRotation = degrees % 360;
-    const prizeIndex = Math.floor(((360 - actualRotation) % 360) / (360 / prizes.length));
+    const prizeIndex = Math.floor(((360 - actualRotation) % 360) / (360  / prizes.length));
     const prize = prizes[prizeIndex];
 
     if (prize.name === 'Sigue participando') {
@@ -196,6 +198,7 @@ function showNotification(message, type) {
     }, 3000);
 }
 
+// Event Listeners
 spinButton.addEventListener('click', spinWheel);
 
 tabs.forEach(tab => {
@@ -208,6 +211,7 @@ tabs.forEach(tab => {
     });
 });
 
+// PayPal
 paypal.Buttons({
     createOrder: function(data, actions) {
         return actions.order.create({
@@ -227,5 +231,6 @@ paypal.Buttons({
     }
 }).render('#paypal-button-container');
 
+// Inicialización
 createWheel();
 updateBalance();
