@@ -23,11 +23,13 @@ const tabContents = document.querySelectorAll('.tab-content');
 
 // Crear la ruleta
 function createWheel() {
+    console.log("Generando la ruleta...");  // Depuración
     wheel.innerHTML = '';
     const totalDegrees = 360;
     const pieceAngle = totalDegrees / prizes.length;
 
     prizes.forEach((prize, index) => {
+        console.log(`Añadiendo premio: ${prize.name}`);  // Depuración
         const slice = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         const startAngle = index * pieceAngle;
         const endAngle = (index + 1) * pieceAngle;
@@ -56,6 +58,7 @@ function createWheel() {
         text.setAttribute('text-anchor', 'middle');
         text.setAttribute('fill', 'white');
         text.setAttribute('font-size', '4');
+        text.setAttribute('font-weight', 'bold');
         text.setAttribute('transform', `rotate(${textAngle}, ${textX}, ${textY})`);
         text.textContent = prize.name;
         wheel.appendChild(text);
@@ -88,13 +91,11 @@ function createWheel() {
     const center = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     center.setAttribute('cx', '50');
     center.setAttribute('cy', '50');
-    
     center.setAttribute('r', '5');
     center.setAttribute('fill', '#800080');
     wheel.appendChild(center);
 }
 
-// Funciones de la ruleta
 function spinWheel() {
     if (spinning) return;
     if (participationMethod === 'direct' && balance < 1) {
