@@ -72,4 +72,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }, spins * 1000);
     }
 
-    function stopWh
+    function stopWheel(degrees) {
+        spinning
