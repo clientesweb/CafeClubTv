@@ -4,93 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruleta de Premios</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-       :root {
-    --burgundy: #800020;
-    --light-gray: #F0F0F0;
-    --gold: #FFD700;
-    --primary-text: #333333;
-    --green: #00E68E;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--light-gray);
-    color: var(--primary-text);
-    text-align: center;
-}
-
-.container {
-    margin: 50px auto;
-}
-
-.wheel-container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-}
-
-.wheel {
-    width: 100%;
-    height: 100%;
-    transition: transform 5s ease;
-}
-
-.wheel-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 50%;
-    z-index: 10;
-}
-
-.marker {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
-    background-color: var(--gold);
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    z-index: 5;
-}
-
-.button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: var(--green);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        #wheel {
+            width: 300px;
+            height: 300px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .win { color: green; }
+        .lose { color: red; }
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .tab.active {
+            background-color: #e0e0e0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Ruleta de Premios</h1>
-        <div class="wheel-container">
-            <svg class="wheel" id="wheel" viewBox="0 0 100 100">
-                <!-- SVG se generará aquí -->
-            </svg>
-            <div class="wheel-center"></div>
-            <div class="marker"></div>
+        <div class="tabs">
+            <div class="tab active" data-tab="views">Vistas</div>
+            <div class="tab" data-tab="direct">Participación directa</div>
         </div>
-        <button id="spinButton" class="button">JUGAR</button>
+        <div id="viewsContent" class="tab-content active">
+            <p>Gira la ruleta gratis después de ver un anuncio.</p>
+        </div>
+        <div id="directContent" class="tab-content">
+            <p>Saldo actual: $<span id="balance">0</span></p>
+            <div id="paypal-button-container"></div>
+        </div>
+        <svg id="wheel" viewBox="0 0 100 100"></svg>
+        <br>
+        <button id="spinButton">Girar</button>
         <div id="result"></div>
     </div>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script src="roulette.js"></script>
 </body>
 </html>
