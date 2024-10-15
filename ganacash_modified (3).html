@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CafeClubTV - Ruleta Gana Cash</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --burgundy: #800020;
+            --light-gray: #F0F0F0;
+            --gold: #FFD700;
+            --primary-text: #333333;
+            --secondary-text: #666666;
+            --pink: #E6007E;
+            --green: #00E68E;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--primary-text);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--burgundy);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .tab {
+            padding: 12px 24px;
+            background-color: var(--light-gray);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            font-weight: bold;
+            color: var(--primary-text);
+        }
+        .tab:first-child {
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+        .tab:last-child {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .tab.active {
+            background-color: var(--burgundy);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+        }
+        .wheel {
+            width: 100%;
+            height: 100%;
+            transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .marker {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background-color: var(--gold);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            z-index: 5;
+        }
+        .button {
+            display: inline-block;
+            width: 200px;
+            margin: 10px;
+            padding: 12px;
+            background-color: var(--green);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .button:hover {
+            background-color: #00C67A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        .button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        #result {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .win {
+            background-color: #4CAF50;
+            color: white;
+            animation: pulse 1s infinite;
+        }
+        .lose {
+            background-color: #f44336;
+            color: white;
+        }
+        .slider {
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px 0;
+            background-color: var(--light-gray);
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .slider-content {
+            display: inline-block;
+            animation: slide 20s linear infinite;
+        }
+        .slider-item {
+            display: inline-block;
+            margin: 0 20px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .wheel-container {
+                width: 250px;
+                height: 250px;
+            }
+            .button {
+                width: 150px;
+                font-size: 0.9em;
+            }
+        }
+        @media (max-width: 480px) {
+            .wheel-container {
+                width: 200px;
+                height: 200px;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .tab {
+                border-radius: 20px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="CafeClubTV Logo" class="logo">
+        <h1>Ruleta Gana Cash</h1>
+    </header>
+    <div class="container">
+        <!-- Banner superior -->
+        <div class="slider fade-in">
+            <div class="slider-content">
+                <span class="slider-item">¡Juega responsablemente!</span>
+                <span class="slider-item">Recuerda: es solo un juego.</span>
+                <span class="slider-item">La suerte puede cambiar en cualquier momento.</span>
+            </div>
+        </div>
+
+        <div class="tabs fade-in">
+            <button class="tab active" data-tab="views">Por Visualizaciones</button>
+            <button class="tab" data-tab="direct">Por Pago Directo</button>
+        </div>
+        <div id="viewsContent" class="tab-content active fade-in">
+            <p>Participa viendo videos y haciendo clic en llamados a la acción</p>
+        </div>
+        <div id="directContent" class="tab-content fade-in">
+            <p>Saldo actual: $<span id="balance">0</span></p>
+            <div id="paypal-button-container"></div>
+        </div>
+        <div class="wheel-container fade-in">
+            <svg class="wheel" id="wheel" viewBox="0 0 100 100">
+                <!-- SVG content will be dynamically generated -->
+            </svg>
+            <div class="wheel-center"></div>
+            <div class="marker"></div>
+        </div>
+        <button id="spinButton" class="button fade-in">JUGAR</button>
+        <div id="result" class="fade-in"></div>
+
+        <!-- Slider de anuncios -->
+        <div class="slider fade-in">
+            <div class="slider-content">
+                <img src="ad1.jpg" alt="Anuncio 1" class="slider-item">
+                <img src="ad2.jpg" alt="Anuncio 2" class="slider-item">
+                <img src="ad3.jpg" alt="Anuncio 3" class="slider-item">
+            </div>
+        </div>
+
+        <!-- Slider de patrocinadores -->
+        <div class="slider fade-in">
+            <div class="slider-content">
+                <img src="sponsor1.png" alt="Patrocinador 1" class="slider-item">
+                <img src="sponsor2.png" alt="Patrocinador 2" class="slider-item">
+                <img src="sponsor3.png" alt="Patrocinador 3" class="slider-item">
+            </div>
+        </div>
+    </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+    <script src="roulette.js"></script>
+</body>
+</html>
