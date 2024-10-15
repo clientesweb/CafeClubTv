@@ -64,10 +64,3 @@ function createWheel() {
     border.setAttribute('cx', '50');
     border.setAttribute('cy', '50');
     border.setAttribute('r', '49');
-    border.setAttribute('fill', 'none');
-    border.setAttribute('stroke', '#800080');
-    border.setAttribute('stroke-width', '2');
-    wheel.appendChild(border);
-
-    for (let i = 0; i < prizes.length; i++) {
-        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
