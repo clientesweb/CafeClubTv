@@ -37,17 +37,14 @@
             text-align: center;
             padding: 20px 0;
             margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         .logo {
             max-width: 200px;
             margin-bottom: 20px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
         .tabs {
             display: flex;
@@ -75,27 +72,20 @@
         .tab.active {
             background-color: var(--burgundy);
             color: white;
-            transform: scale(1.05);
         }
         .tab-content {
             display: none;
             text-align: center;
             margin-bottom: 20px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.5s ease-in;
         }
         .wheel-container {
             position: relative;
             width: 300px;
             height: 300px;
             margin: 0 auto 30px;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
         }
         .wheel {
             width: 100%;
@@ -107,24 +97,22 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            background-color: var(--burgundy);
+            width: 20px;
+            height: 20px;
+            background-color: white;
             border-radius: 50%;
             z-index: 10;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
         .marker {
             position: absolute;
-            top: -20px;
+            top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             background-color: var(--gold);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             z-index: 5;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
         }
         .button {
             display: inline-block;
@@ -174,10 +162,9 @@
             overflow: hidden;
             white-space: nowrap;
             padding: 10px 0;
-            background-color: white;
+            background-color: var(--light-gray);
             margin: 20px 0;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .slider-content {
             display: inline-block;
