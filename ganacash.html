@@ -86,6 +86,7 @@
             width: 300px;
             height: 300px;
             margin: 0 auto 30px;
+            border: 2px solid red; /* Added for debugging */
         }
         .wheel {
             width: 100%;
@@ -231,26 +232,6 @@
         <h1>Ruleta Gana Cash</h1>
     </header>
     <div class="container">
-        <!-- Banner superior -->
-        <div class="slider fade-in">
-            <div class="slider-content">
-                <span class="slider-item">¡Juega responsablemente!</span>
-                <span class="slider-item">Recuerda: es solo un juego.</span>
-                <span class="slider-item">La suerte puede cambiar en cualquier momento.</span>
-            </div>
-        </div>
-
-        <div class="tabs fade-in">
-            <button class="tab active" data-tab="views">Por Visualizaciones</button>
-            <button class="tab" data-tab="direct">Por Pago Directo</button>
-        </div>
-        <div id="viewsContent" class="tab-content active fade-in">
-            <p>Participa viendo videos y haciendo clic en llamados a la acción</p>
-        </div>
-        <div id="directContent" class="tab-content fade-in">
-            <p>Saldo actual: $<span id="balance">0</span></p>
-            <div id="paypal-button-container"></div>
-        </div>
         <div class="wheel-container fade-in">
             <svg class="wheel" id="wheel" viewBox="0 0 100 100">
                 <!-- SVG content will be dynamically generated -->
@@ -260,26 +241,7 @@
         </div>
         <button id="spinButton" class="button fade-in">JUGAR</button>
         <div id="result" class="fade-in"></div>
-
-        <!-- Slider de anuncios -->
-        <div class="slider fade-in">
-            <div class="slider-content">
-                <img src="ad1.jpg" alt="Anuncio 1" class="slider-item">
-                <img src="ad2.jpg" alt="Anuncio 2" class="slider-item">
-                <img src="ad3.jpg" alt="Anuncio 3" class="slider-item">
-            </div>
-        </div>
-
-        <!-- Slider de patrocinadores -->
-        <div class="slider fade-in">
-            <div class="slider-content">
-                <img src="sponsor1.png" alt="Patrocinador 1" class="slider-item">
-                <img src="sponsor2.png" alt="Patrocinador 2" class="slider-item">
-                <img src="sponsor3.png" alt="Patrocinador 3" class="slider-item">
-            </div>
-        </div>
     </div>
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
     <script src="roulette.js"></script>
 </body>
 </html>
