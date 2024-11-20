@@ -34,28 +34,55 @@ const componentsToLoad = [
     { component: BottomNav, id: 'bottom-nav' }
 ];
 
-const initAdSlider = () => {
-    const sliderContent = document.querySelector('.slider-content');
-    const sliderItems = document.querySelectorAll('.slider-item');
-    let currentIndex = 0;
+const initProgramSlider = () => {
+    const programData = [
+        { title: 'Café Mañanero', schedule: 'Lunes a Viernes, 7:00 AM', image: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
+        { title: 'Noticias al Día', schedule: 'Lunes a Viernes, 12:00 PM', image: 'https://images.unsplash.com/photo-1588600878108-578307a3cc9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
+        { title: 'Cocina con Sabor', schedule: 'Sábados y Domingos, 2:00 PM', image: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
+        { title: 'Cine Club', schedule: 'Viernes, 9:00 PM', image: 'https://images.unsplash.com/photo-1603190287605-e6ade32fa852?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
+        // Agrega más programas aquí
+    ];
 
-    const showSlide = (index) => {
-        sliderContent.style.transform = `translateX(-${index * 100}%)`;
+    const sliderContainer = document.querySelector('.program-slider');
+    
+    programData.forEach(program => {
+        const programElement = document.createElement('div');
+        programElement.className = 'program-item bg-white rounded-lg shadow-md overflow-hidden';
+        programElement.innerHTML = `
+            <img src="${program.image}" alt="${program.title}" class="w-full h-32 object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg mb-2">${program.title}</h3>
+                <p class="text-sm text-gray-600">${program.schedule}</p>
+            </div>
+        `;
+        programElement.addEventListener('click', () => {
+            // Aquí puedes agregar la lógica para redirigir a la playlist del programa
+            console.log(`Redirigiendo a la playlist de ${program.title}`);
+        });
+        sliderContainer.appendChild(programElement);
+    });
+
+    // Implementar desplazamiento automático
+    let scrollPosition = 0;
+    const scrollSpeed = 1; // Ajusta la velocidad de desplazamiento
+
+    const autoScroll = () => {
+        scrollPosition += scrollSpeed;
+        if (scrollPosition >= sliderContainer.scrollWidth - sliderContainer.clientWidth) {
+            scrollPosition = 0;
+        }
+        sliderContainer.scrollTo(scrollPosition, 0);
+        requestAnimationFrame(autoScroll);
     };
 
-    const nextSlide = () => {
-        currentIndex = (currentIndex + 1) % sliderItems.length;
-        showSlide(currentIndex);
-    };
-
-    setInterval(nextSlide, 5000); // Cambia de slide cada 5 segundos
+    autoScroll();
 };
 
 const initApp = async () => {
     try {
         await Promise.all(componentsToLoad.map(({ component, id }) => loadComponent(component, id)));
         console.log('Todos los componentes cargados correctamente');
-        initAdSlider();
+        initProgramSlider();
     } catch (error) {
         console.error('Error durante la inicialización de la aplicación:', error);
     } finally {
@@ -73,4 +100,14 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
+}
+
+if ('windowControlsOverlay' in navigator) {
+    const overlayHeight = navigator.windowControlsOverlay.getTitlebarAreaRect().height;
+    document.documentElement.style.setProperty('--window-controls-overlay-height', `${overlayHeight}px`);
+
+    navigator.windowControlsOverlay.addEventListener('geometrychange', () => {
+        const newOverlayHeight = navigator.windowControlsOverlay.getTitlebarAreaRect().height;
+        document.documentElement.style.setProperty('--window-controls-overlay-height', `${newOverlayHeight}px`);
+    });
 }
