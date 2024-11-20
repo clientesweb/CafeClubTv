@@ -53,8 +53,14 @@ const initProgramSlider = () => {
             <div class="content">
                 <h3>${program.title}</h3>
                 <p>${program.schedule}</p>
+                <a href="#" class="btn-ver">Ver</a>
             </div>
         `;
+        programElement.querySelector('.btn-ver').addEventListener('click', (e) => {
+            e.preventDefault();
+            // Aquí puedes agregar la lógica para redirigir a la playlist del programa
+            console.log(`Redirigiendo a la playlist de ${program.title}`);
+        });
         sliderContainer.appendChild(programElement);
     });
 
