@@ -17,37 +17,40 @@ export default function Header() {
         <header class="bg-white text-gray-800 shadow-md z-50">
             <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between h-16">
-                    <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                    <div class="flex-1 flex justify-center">
-                        <div class="logo flex items-center space-x-3">
-                            <img src="https://clientesweb.github.io/CafeClubTv/images/logi.svg" alt="Logo de Cafe Club Tv" class="h-12 w-auto transition-all duration-300 hover:scale-110">
-                            <span class="text-2xl font-bold tracking-tight">Cafe Club TV</span>
+                    <div class="flex items-center">
+                        <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 mr-2 md:hidden">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                        <div class="hidden md:flex items-center space-x-4">
+                            <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                                <i class="fab fa-facebook text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
                         </div>
                     </div>
-                    <nav class="hidden md:flex items-center space-x-6">
-                        <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Inicio</a>
-                        <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Programas</a>
-                        <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Playlists</a>
-                        <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Contacto</a>
-                    </nav>
-                    <div class="hidden md:flex items-center space-x-4">
-                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
-                            <i class="fab fa-youtube text-xl"></i>
-                        </a>
+                    <div class="flex-1 flex justify-center">
+                        <div class="logo flex items-center">
+                            <img src="https://clientesweb.github.io/CafeClubTv/images/logi.svg" alt="Logo de Cafe Club Tv" class="h-12 w-auto transition-all duration-300 hover:scale-110">
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <nav class="hidden md:flex items-center space-x-6 mr-4">
+                            <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Inicio</a>
+                            <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Programas</a>
+                            <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Playlists</a>
+                            <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Contacto</a>
+                        </nav>
                         ${isInstallable ? `
-                            <button id="install-button" class="bg-red-600 hover:bg-red-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
+                            <button id="install-button" class="bg-red-600 hover:bg-red-700 text-white rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg flex items-center">
                                 <i class="fas fa-download mr-2"></i>
-                                <span>Instalar App</span>
+                                <span class="hidden md:inline">Instalar App</span>
                             </button>
                         ` : ''}
                     </div>
@@ -70,12 +73,6 @@ export default function Header() {
                             <i class="fab fa-youtube text-xl"></i>
                         </a>
                     </div>
-                    ${isInstallable ? `
-                        <button id="mobile-install-button" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
-                            <i class="fas fa-download mr-2"></i>
-                            <span>Instalar App</span>
-                        </button>
-                    ` : ''}
                 </nav>
             </div>
         </header>
@@ -88,9 +85,8 @@ export default function Header() {
             e.preventDefault();
             deferredPrompt = e;
             const installButton = header.querySelector('#install-button');
-            const mobileInstallButton = header.querySelector('#mobile-install-button');
 
-            const installHandler = () => {
+            installButton.addEventListener('click', () => {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
@@ -100,10 +96,7 @@ export default function Header() {
                     }
                     deferredPrompt = null;
                 });
-            };
-
-            installButton.addEventListener('click', installHandler);
-            mobileInstallButton.addEventListener('click', installHandler);
+            });
         });
     }
 
