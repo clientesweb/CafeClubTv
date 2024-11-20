@@ -1,128 +1,178 @@
-import Header from './components/Header.js';
-import Carousel from './components/Carousel.js';
-import Playlists from './components/Playlists.js';
-import Shorts from './components/Shorts.js';
-import Sponsors from './components/Sponsors.js';
-import Counters from './components/Counters.js';
-import Footer from './components/Footer.js';
-import WhatsAppFloat from './components/WhatsAppFloat.js';
-import BottomNav from './components/BottomNav.js';
+@import 'components/header.css';
+@import 'components/carousel.css';
+@import 'components/playlists.css';
+@import 'components/shorts.css';
+@import 'components/sponsors.css';
+@import 'components/counters.css';
+@import 'components/footer.css';
+@import 'components/whatsapp-float.css';
+@import 'components/bottom-nav.css';
 
-const loadComponent = async (component, elementId) => {
-    try {
-        const element = document.getElementById(elementId);
-        if (element) {
-            await component(element);
-            console.log(`${elementId} cargado correctamente`);
-        } else {
-            console.warn(`Elemento con id ${elementId} no encontrado`);
-        }
-    } catch (error) {
-        console.error(`Error al cargar ${elementId}:`, error);
-    }
-};
-
-const componentsToLoad = [
-    { component: Header, id: 'header' },
-    { component: Carousel, id: 'carousel' },
-    { component: Playlists, id: 'playlists' },
-    { component: Shorts, id: 'shorts' },
-    { component: Sponsors, id: 'sponsors' },
-    { component: Counters, id: 'counters' },
-    { component: Footer, id: 'footer' },
-    { component: WhatsAppFloat, id: 'whatsapp-float' },
-    { component: BottomNav, id: 'bottom-nav' }
-];
-
-const initProgramSlider = () => {
-    const programData = [
-        { title: 'Café Mañanero', schedule: 'Lunes a Viernes, 7:00 AM', image: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
-        { title: 'Noticias al Día', schedule: 'Lunes a Viernes, 12:00 PM', image: 'https://images.unsplash.com/photo-1588600878108-578307a3cc9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
-        { title: 'Cocina con Sabor', schedule: 'Sábados y Domingos, 2:00 PM', image: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
-        { title: 'Cine Club', schedule: 'Viernes, 9:00 PM', image: 'https://images.unsplash.com/photo-1603190287605-e6ade32fa852?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
-        // Agrega más programas aquí
-    ];
-
-    const sliderContainer = document.querySelector('.program-slider');
-    
-    programData.forEach(program => {
-        const programElement = document.createElement('div');
-        programElement.className = 'program-item';
-        programElement.innerHTML = `
-            <img src="${program.image}" alt="${program.title}" class="w-full h-32 object-cover">
-            <div class="content">
-                <h3>${program.title}</h3>
-                <p>${program.schedule}</p>
-                <a href="#" class="btn-ver">Ver</a>
-            </div>
-        `;
-        programElement.querySelector('.btn-ver').addEventListener('click', (e) => {
-            e.preventDefault();
-            // Aquí puedes agregar la lógica para redirigir a la playlist del programa
-            console.log(`Redirigiendo a la playlist de ${program.title}`);
-        });
-        sliderContainer.appendChild(programElement);
-    });
-
-    // Implementar desplazamiento automático
-    let scrollPosition = 0;
-    const scrollSpeed = 1; // Ajusta la velocidad de desplazamiento
-
-    const autoScroll = () => {
-        scrollPosition += scrollSpeed;
-        if (scrollPosition >= sliderContainer.scrollWidth - sliderContainer.clientWidth) {
-            scrollPosition = 0;
-        }
-        sliderContainer.scrollTo(scrollPosition, 0);
-        requestAnimationFrame(autoScroll);
-    };
-
-    autoScroll();
-};
-
-const initFloatingButton = () => {
-    const floatingButton = document.getElementById('floating-button');
-    const pushNotification = document.getElementById('push-notification');
-
-    floatingButton.addEventListener('mouseenter', () => {
-        pushNotification.classList.add('show');
-        setTimeout(() => {
-            pushNotification.classList.remove('show');
-        }, 3000);
-    });
-};
-
-const initApp = async () => {
-    try {
-        await Promise.all(componentsToLoad.map(({ component, id }) => loadComponent(component, id)));
-        console.log('Todos los componentes cargados correctamente');
-        initProgramSlider();
-        initFloatingButton();
-    } catch (error) {
-        console.error('Error durante la inicialización de la aplicación:', error);
-    } finally {
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
-        }
-    }
-};
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    initApp();
+/* Estilos globales */
+:root {
+    --primary-color: #ff0000;
+    --secondary-color: #ffff00;
+    --text-color: #333333;
+    --background-color: #f5f5f5;
 }
 
-if ('windowControlsOverlay' in navigator) {
-    const overlayHeight = navigator.windowControlsOverlay.getTitlebarAreaRect().height;
-    document.documentElement.style.setProperty('--window-controls-overlay-height', `${overlayHeight}px`);
+html {
+    --window-controls-overlay-height: env(titlebar-area-height, 0px);
+    padding-top: var(--window-controls-overlay-height);
+}
 
-    navigator.windowControlsOverlay.addEventListener('geometrychange', () => {
-        const newOverlayHeight = navigator.windowControlsOverlay.getTitlebarAreaRect().height;
-        document.documentElement.style.setProperty('--window-controls-overlay-height', `${newOverlayHeight}px`);
-    });
+body {
+    padding-bottom: 60px; /* Espacio para el menú inferior */
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+/* Estilos para el botón flotante */
+#ganacash-float {
+    transition: all 0.3s ease;
+}
+
+#ganacash-float:hover {
+    transform: scale(1.1);
+}
+
+#push-notification {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+#push-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilos para la sección de descarga de la aplicación */
+#app-download {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#app-download h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+#app-download .flex {
+    margin-bottom: 1rem;
+}
+
+#app-download img {
+    transition: transform 0.3s ease;
+}
+
+#app-download img:hover {
+    transform: scale(1.05);
+}
+
+/* Estilos para la grilla de programas */
+#program-grid {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#program-grid h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.program-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none; /* Para Internet Explorer y Edge */
+}
+
+.program-slider::-webkit-scrollbar {
+    display: none; /* Para Chrome, Safari y Opera */
+}
+
+.program-item {
+    flex: 0 0 auto;
+    width: 250px;
+    margin-right: 1rem;
+    scroll-snap-align: start;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.program-item:hover {
+    transform: translateY(-5px);
+}
+
+.program-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.program-item .content {
+    padding: 1rem;
+}
+
+.program-item h3 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.program-item p {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Estilos para el menú inferior */
+#bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    padding: 0 1rem;
+    background-color: var(--primary-color);
+}
+
+#bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+#bottom-nav a:hover {
+    color: var(--secondary-color);
+}
+
+#bottom-nav i {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    #program-grid .program-slider {
+        scroll-snap-type: x mandatory;
+    }
+
+    #program-grid .program-item {
+        scroll-snap-align: start;
+    }
 }
