@@ -8,7 +8,7 @@
 @import 'components/whatsapp-float.css';
 @import 'components/bottom-nav.css';
 
-/* Estilos globales */
+/* Estilos globales*/
 :root {
   --primary-color: #ff0000;
   --secondary-color: #ffff00;
@@ -181,6 +181,47 @@ body {
   margin-bottom: 0.25rem;
 }
 
+/* Estilos para el carrusel */
+#carousel {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.carousel-control {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#carousel:hover .carousel-control {
+    opacity: 1;
+}
+
+.carousel-indicators {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#carousel:hover .carousel-indicators {
+    opacity: 1;
+}
+
+.indicator {
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.indicator:hover {
+    transform: scale(1.2);
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .container {
@@ -194,5 +235,9 @@ body {
 
   #program-grid .program-item {
     scroll-snap-align: start;
+  }
+
+  .carousel-control, .carousel-indicators {
+    opacity: 1;
   }
 }
