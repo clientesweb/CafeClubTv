@@ -2,7 +2,7 @@ export default function Carousel() {
     const carousel = document.getElementById('carousel');
     const images = [
         'https://clientesweb.github.io/CafeClubTv/images/image1.jpg',
-        'https://clientesweb.github.io/CafeClubTv/images/image2%20(1).jpg', // Codificado
+        'https://clientesweb.github.io/CafeClubTv/images/image2%20(1).jpg',
         'https://clientesweb.github.io/CafeClubTv/images/image3.jpg',
         'https://clientesweb.github.io/CafeClubTv/images/image4.jpg',
         'https://clientesweb.github.io/CafeClubTv/images/image5.jpg',
@@ -11,90 +11,108 @@ export default function Carousel() {
 
     let currentSlide = 0;
     let isTransitioning = false;
+    let autoplayInterval;
 
-    // Crear HTML del carrusel
-    carousel.innerHTML = `
-        <div class="relative w-full aspect-video overflow-hidden rounded-xl shadow-xl">
-            <div class="flex transition-transform duration-700 ease-in-out will-change-transform">
-                ${images.map(src => `
-                    <img 
-                        data-src="${src}" 
-                        alt="Slide" 
-                        class="w-full h-full object-cover flex-shrink-0 lazy-load opacity-0 transition-opacity duration-500"
-                    >
-                `).join('')}
-            </div>
-            <button class="prev absolute top-1/2 left-4 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">&#10094;</button>
-            <button class="next absolute top-1/2 right-4 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">&#10095;</button>
-            <div class="indicators absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                ${images.map((_, index) => `
-                    <button class="indicator w-3 h-3 bg-gray-400 rounded-full focus:outline-none ${index === 0 ? 'bg-red-600' : ''}" data-index="${index}"></button>
-                `).join('')}
-            </div>
-        </div>
-    `;
-
-    const slideContainer = carousel.querySelector('.flex');
+    const carouselInner = carousel.querySelector('.carousel-inner');
     const prevButton = carousel.querySelector('.prev');
     const nextButton = carousel.querySelector('.next');
-    const slides = carousel.querySelectorAll('.lazy-load');
-    const indicators = carousel.querySelectorAll('.indicator');
+    const indicatorsContainer = carousel.querySelector('.carousel-indicators');
 
-    // Función para cargar imágenes con lazy loading
-    function loadSlideImage(index) {
-        const img = slides[index];
-        if (!img.src) {
-            img.src = img.getAttribute('data-src');
-            img.onload = () => {
-                img.classList.remove('opacity-0');
-            };
-        }
+    function createCarouselItems() {
+        carouselInner.innerHTML = images.map((src, index) => `
+            <div class="carousel-item w-full flex-shrink-0">
+                <img 
+                    src="${src}" 
+                    alt="Slide ${index + 1}" 
+                    class="w-full h-full object-cover"
+                    loading="${index === 0 ? 'eager' : 'lazy'}"
+                >
+            </div>
+        `).join('');
+
+        indicatorsContainer.innerHTML = images.map((_, index) => `
+            <button class="indicator w-3 h-3 bg-white/50 rounded-full focus:outline-none transition-all duration-300 ${index === 0 ? 'bg-white' : ''}" data-index="${index}"></button>
+        `).join('');
     }
 
-    // Mostrar slide actual
     function showSlide(index) {
         if (isTransitioning) return;
         isTransitioning = true;
 
-        currentSlide = index;
-        slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        currentSlide = (index + images.length) % images.length;
+        carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
         
-        loadSlideImage(currentSlide);
         updateIndicators();
 
-        requestAnimationFrame(() => {
+        setTimeout(() => {
             isTransitioning = false;
+        }, 500);
+    }
+
+    function updateIndicators() {
+        const indicators = indicatorsContainer.querySelectorAll('.indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('bg-white', index === currentSlide);
+            indicator.classList.toggle('bg-white/50', index !== currentSlide);
         });
     }
 
-    // Actualizar indicadores
-    function updateIndicators() {
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('bg-red-600', index === currentSlide);
-            indicator.classList.toggle('bg-gray-400', index !== currentSlide);
-        });
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayInterval = setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
     }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+
+    createCarouselItems();
 
     prevButton.addEventListener('click', () => {
-        showSlide((currentSlide - 1 + images.length) % images.length);
+        showSlide(currentSlide - 1);
+        stopAutoplay();
     });
 
     nextButton.addEventListener('click', () => {
-        showSlide((currentSlide + 1) % images.length);
+        showSlide(currentSlide + 1);
+        stopAutoplay();
     });
 
-    indicators.forEach(indicator => {
-        indicator.addEventListener('click', () => {
-            const index = parseInt(indicator.getAttribute('data-index'));
+    indicatorsContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('indicator')) {
+            const index = parseInt(e.target.getAttribute('data-index'));
             showSlide(index);
-        });
+            stopAutoplay();
+        }
     });
 
-    // Auto-desplazamiento cada 5 segundos
-    setInterval(() => {
-        showSlide((currentSlide + 1) % images.length);
-    }, 5000);
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
 
-    // Cargar la primera imagen al iniciar
-    loadSlideImage(0);
+    // Iniciar el autoplay
+    startAutoplay();
+
+    // Añadir soporte para gestos táctiles
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+            showSlide(currentSlide + 1);
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+            showSlide(currentSlide - 1);
+        }
+    }
 }
