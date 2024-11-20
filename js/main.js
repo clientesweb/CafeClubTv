@@ -7,7 +7,6 @@ import Counters from './components/Counters.js';
 import Footer from './components/Footer.js';
 import WhatsAppFloat from './components/WhatsAppFloat.js';
 import BottomNav from './components/BottomNav.js';
-import Roulette from './components/Roulette.js';
 
 const loadComponent = async (component, elementId) => {
     try {
@@ -32,14 +31,31 @@ const componentsToLoad = [
     { component: Counters, id: 'counters' },
     { component: Footer, id: 'footer' },
     { component: WhatsAppFloat, id: 'whatsapp-float' },
-    { component: BottomNav, id: 'bottom-nav' },
-    { component: Roulette, id: 'roulette' }
+    { component: BottomNav, id: 'bottom-nav' }
 ];
+
+const initAdSlider = () => {
+    const sliderContent = document.querySelector('.slider-content');
+    const sliderItems = document.querySelectorAll('.slider-item');
+    let currentIndex = 0;
+
+    const showSlide = (index) => {
+        sliderContent.style.transform = `translateX(-${index * 100}%)`;
+    };
+
+    const nextSlide = () => {
+        currentIndex = (currentIndex + 1) % sliderItems.length;
+        showSlide(currentIndex);
+    };
+
+    setInterval(nextSlide, 5000); // Cambia de slide cada 5 segundos
+};
 
 const initApp = async () => {
     try {
         await Promise.all(componentsToLoad.map(({ component, id }) => loadComponent(component, id)));
         console.log('Todos los componentes cargados correctamente');
+        initAdSlider();
     } catch (error) {
         console.error('Error durante la inicialización de la aplicación:', error);
     } finally {
