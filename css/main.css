@@ -8,236 +8,33 @@
 @import 'components/whatsapp-float.css';
 @import 'components/bottom-nav.css';
 
-/* Estilos globales*/
-:root {
-  --primary-color: #ff0000;
-  --text-color: #333333;
-  --background-color: #f5f5f5;
-  --lead-gray: #708090; /* Añadido: color gris plomo */
-}
-
+/* Estilos globales adicionales si son necesarios */
 html {
-  --window-controls-overlay-height: env(titlebar-area-height, 0px);
-  padding-top: var(--window-controls-overlay-height);
+    --window-controls-overlay-height: env(titlebar-area-height, 0px);
+    padding-top: var(--window-controls-overlay-height);
 }
 
-body {
-  padding-bottom: 60px; /* Espacio para el menú inferior */
-  color: var(--text-color);
-  background-color: var(--background-color);
-}
-
-/* Estilos para el botón flotante */
-#ganacash-float {
-  transition: all 0.3s ease;
-}
-
-#ganacash-float:hover {
-  transform: scale(1.1);
-}
-
-#push-notification {
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-#push-notification.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Estilos para la sección de descarga de la aplicación */
-#app-download {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-#app-download h2 {
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-}
-
-#app-download .flex {
-  margin-bottom: 1rem;
-}
-
-#app-download img {
-  transition: transform 0.3s ease;
-}
-
-#app-download img:hover {
-  transform: scale(1.05);
-}
-
-/* Estilos para la grilla de programas */
-#program-grid {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-#program-grid h2 {
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-}
-
-.program-slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Para Firefox */
-  -ms-overflow-style: none; /* Para Internet Explorer y Edge */
-}
-
-.program-slider::-webkit-scrollbar {
-  display: none; /* Para Chrome, Safari y Opera */
-}
-
-.program-item {
-  flex: 0 0 auto;
-  width: 250px;
-  margin-right: 1rem;
-  scroll-snap-align: start;
-  background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.program-item:hover {
-  transform: translateY(-5px);
-}
-
-.program-item img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
-.program-item .content {
-  padding: 1rem;
-}
-
-.program-item h3 {
-  color: var(--primary-color);
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.program-item p {
-  color: var(--text-color);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.program-item .btn-ver {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.program-item .btn-ver:hover {
-  background-color: var(--lead-gray); /* Cambiado: usar gris plomo en lugar de amarillo */
-  color: white; /* Cambiado: mantener el texto en blanco para mejor contraste */
-}
-
-/* Estilos para el menú inferior */
-#bottom-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 60px;
-  padding: 0 1rem;
-  background-color: var(--lead-gray); /* Cambiado: usar gris plomo como fondo */
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-
-#bottom-nav a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: white;
-  font-size: 0.8rem;
-  transition: color 0.3s ease;
-}
-
-#bottom-nav a:hover {
-  color: var(--primary-color); /* Cambiado: usar color primario (rojo) para hover */
-}
-
-#bottom-nav i {
-  font-size: 1.5rem;
-  margin-bottom: 0.25rem;
-}
-
-/* Estilos para el carrusel */
-#carousel {
-    max-width: 100%;
-    aspect-ratio: 16 / 9;
-}
-
-.carousel-inner {
+#titlebar {
+    height: var(--window-controls-overlay-height);
+    background-color: var(--theme_color);
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 16px;
 }
 
-.carousel-item {
-    width: 100%;
-    flex-shrink: 0;
+#titlebar .window-controls {
+    display: flex;
+    gap: 8px;
 }
 
-.carousel-control {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-#carousel:hover .carousel-control {
-    opacity: 1;
-}
-
-.carousel-indicators {
-    transition: opacity 0.3s ease-in-out;
-}
-
-#carousel:hover .carousel-indicators {
-    opacity: 1;
-}
-
-.indicator {
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.indicator:hover {
-    transform: scale(1.2);
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  #program-grid .program-slider {
-    scroll-snap-type: x mandatory;
-  }
-
-  #program-grid .program-item {
-    scroll-snap-align: start;
-  }
-
-  .carousel-control, .carousel-indicators {
-    opacity: 1;
-  }
+#titlebar .window-controls button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
 }
