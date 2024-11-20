@@ -11,9 +11,9 @@
 /* Estilos globales*/
 :root {
   --primary-color: #ff0000;
-  --secondary-color: #ffff00;
   --text-color: #333333;
   --background-color: #f5f5f5;
+  --lead-gray: #708090; /* Añadido: color gris plomo */
 }
 
 html {
@@ -143,8 +143,8 @@ body {
 }
 
 .program-item .btn-ver:hover {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
+  background-color: var(--lead-gray); /* Cambiado: usar gris plomo en lugar de amarillo */
+  color: white; /* Cambiado: mantener el texto en blanco para mejor contraste */
 }
 
 /* Estilos para el menú inferior */
@@ -154,7 +154,7 @@ body {
   align-items: center;
   height: 60px;
   padding: 0 1rem;
-  background-color: var(--primary-color);
+  background-color: var(--lead-gray); /* Cambiado: usar gris plomo como fondo */
   position: fixed;
   bottom: 0;
   left: 0;
@@ -173,7 +173,7 @@ body {
 }
 
 #bottom-nav a:hover {
-  color: var(--secondary-color);
+  color: var(--primary-color); /* Cambiado: usar color primario (rojo) para hover */
 }
 
 #bottom-nav i {
