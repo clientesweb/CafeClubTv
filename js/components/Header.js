@@ -4,26 +4,75 @@ export default function Header() {
     function checkInstallable() {
         const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
         const isInstagram = /Instagram/.test(navigator.userAgent);
-        return !isInstalled || isInstagram;
+        return !isInstalled && !isInstagram;
     }
 
     const isInstallable = checkInstallable();
 
     header.innerHTML = `
-        <header class="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-4 shadow-lg z-50">
-            <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between">
-                <div class="logo flex items-center space-x-3 mb-4 sm:mb-0">
-                    <img src="https://clientesweb.github.io/CafeClubTv/images/logi.svg" alt="Logo de Cafe Club Tv" class="h-12 w-auto transition-all duration-300 hover:scale-110 filter drop-shadow-lg">
-                    <span class="text-2xl font-bold tracking-tight">Cafe Club TV</span>
+        <div class="bg-red-600 text-white py-2 px-4 text-center text-sm font-medium" id="top-banner">
+            ¡Oferta especial! Suscríbete ahora y obtén un 50% de descuento en tu primer mes.
+            <button class="ml-2 underline hover:text-yellow-300 transition-colors duration-200">Saber más</button>
+        </div>
+        <header class="bg-white text-gray-800 shadow-md z-50">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between h-16">
+                    <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <div class="flex-1 flex justify-center">
+                        <div class="logo flex items-center space-x-3">
+                            <img src="https://clientesweb.github.io/CafeClubTv/images/logi.svg" alt="Logo de Cafe Club Tv" class="h-12 w-auto transition-all duration-300 hover:scale-110">
+                            <span class="text-2xl font-bold tracking-tight">Cafe Club TV</span>
+                        </div>
+                    </div>
+                    <nav class="hidden md:flex items-center space-x-6">
+                        <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Inicio</a>
+                        <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Programas</a>
+                        <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Playlists</a>
+                        <a href="#" class="text-sm font-medium hover:text-red-600 transition-colors duration-200">Contacto</a>
+                    </nav>
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        ${isInstallable ? `
+                            <button id="install-button" class="bg-red-600 hover:bg-red-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
+                                <i class="fas fa-download mr-2"></i>
+                                <span>Instalar App</span>
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
-                <nav class="flex items-center space-x-6">
-                    <a href="#" class="text-sm font-medium hover:text-red-400 transition-colors duration-200">Inicio</a>
-                    <a href="#" class="text-sm font-medium hover:text-red-400 transition-colors duration-200">Programas</a>
-                    <a href="#" class="text-sm font-medium hover:text-red-400 transition-colors duration-200">Playlists</a>
-                    <a href="#" class="text-sm font-medium hover:text-red-400 transition-colors duration-200">Contacto</a>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+                <nav class="px-4 pt-2 pb-4 space-y-2">
+                    <a href="#" class="block text-sm font-medium hover:text-red-600 transition-colors duration-200">Inicio</a>
+                    <a href="#" class="block text-sm font-medium hover:text-red-600 transition-colors duration-200">Programas</a>
+                    <a href="#" class="block text-sm font-medium hover:text-red-600 transition-colors duration-200">Playlists</a>
+                    <a href="#" class="block text-sm font-medium hover:text-red-600 transition-colors duration-200">Contacto</a>
+                    <div class="flex items-center space-x-4 mt-4">
+                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-red-600 transition-colors duration-200">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
                     ${isInstallable ? `
-                        <button id="install-button" class="bg-red-600 hover:bg-red-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 shadow-lg flex items-center space-x-2 group">
-                            <i class="fas fa-download group-hover:animate-bounce"></i>
+                        <button id="mobile-install-button" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
+                            <i class="fas fa-download mr-2"></i>
                             <span>Instalar App</span>
                         </button>
                     ` : ''}
@@ -39,9 +88,9 @@ export default function Header() {
             e.preventDefault();
             deferredPrompt = e;
             const installButton = header.querySelector('#install-button');
+            const mobileInstallButton = header.querySelector('#mobile-install-button');
 
-            installButton.addEventListener('click', () => {
-                installButton.style.display = 'none';
+            const installHandler = () => {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
@@ -51,21 +100,33 @@ export default function Header() {
                     }
                     deferredPrompt = null;
                 });
-            });
+            };
+
+            installButton.addEventListener('click', installHandler);
+            mobileInstallButton.addEventListener('click', installHandler);
         });
     }
+
+    // Manejar el menú móvil
+    const mobileMenuButton = header.querySelector('#mobile-menu-button');
+    const mobileMenu = header.querySelector('#mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
 
     // Añadir efecto de scroll
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
-        const headerElement = document.querySelector('header');
+        const headerElement = header.querySelector('header');
+        const topBanner = header.querySelector('#top-banner');
         
         if (scrollPosition > 50) {
-            headerElement.classList.add('bg-opacity-95', 'backdrop-blur-md');
-            headerElement.classList.remove('bg-opacity-100');
+            headerElement.classList.add('shadow-md');
+            topBanner.classList.add('hidden');
         } else {
-            headerElement.classList.remove('bg-opacity-95', 'backdrop-blur-md');
-            headerElement.classList.add('bg-opacity-100');
+            headerElement.classList.remove('shadow-md');
+            topBanner.classList.remove('hidden');
         }
     });
 }
