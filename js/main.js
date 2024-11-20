@@ -34,7 +34,7 @@ const componentsToLoad = [
     { component: BottomNav, id: 'bottom-nav' }
 ];
 
-const initProgramCarousel = () => {
+const initProgramSlider = () => {
     const programData = [
         { title: 'Café Mañanero', schedule: 'Lunes a Viernes, 7:00 AM', image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
         { title: 'Noticias al Día', schedule: 'Lunes a Viernes, 12:00 PM', image: 'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
@@ -49,13 +49,18 @@ const initProgramCarousel = () => {
     const viewAllButton = document.getElementById('view-all-programs');
 
     let currentIndex = 0;
-    const itemsPerView = Math.floor(sliderContainer.clientWidth / 300);
+    const itemsPerView = 4; // Ajusta este valor según el número de elementos que quieras mostrar a la vez
+
+    const updateSlider = () => {
+        const translateValue = -currentIndex * (100 / itemsPerView);
+        sliderContainer.style.transform = `translateX(${translateValue}%)`;
+    };
 
     const createProgramElement = (program) => {
         const programElement = document.createElement('div');
         programElement.className = 'program-item';
         programElement.innerHTML = `
-            <img src="${program.image}" alt="${program.title}" class="w-full h-40 object-cover">
+            <img src="${program.image}" alt="${program.title}" class="w-full h-32 object-cover">
             <div class="content">
                 <h3 class="text-lg font-semibold">${program.title}</h3>
                 <p class="text-sm text-gray-600">${program.schedule}</p>
@@ -69,11 +74,6 @@ const initProgramCarousel = () => {
         const programElement = createProgramElement(program);
         sliderContainer.appendChild(programElement);
     });
-
-    const updateSlider = () => {
-        const translateValue = -currentIndex * (100 / itemsPerView);
-        sliderContainer.style.transform = `translateX(${translateValue}%)`;
-    };
 
     prevButton.addEventListener('click', () => {
         currentIndex = Math.max(currentIndex - 1, 0);
@@ -95,12 +95,6 @@ const initProgramCarousel = () => {
         currentIndex = 0;
         updateSlider();
     });
-
-    // Iniciar el carrusel automático
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % (programData.length - itemsPerView + 1);
-        updateSlider();
-    }, 5000);
 };
 
 const initFloatingButton = () => {
@@ -119,7 +113,7 @@ const initApp = async () => {
     try {
         await Promise.all(componentsToLoad.map(({ component, id }) => loadComponent(component, id)));
         console.log('Todos los componentes cargados correctamente');
-        initProgramCarousel();
+        initProgramSlider();
         initFloatingButton();
     } catch (error) {
         console.error('Error durante la inicialización de la aplicación:', error);
