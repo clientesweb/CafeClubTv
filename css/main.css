@@ -173,25 +173,6 @@ body {
     opacity: 1;
 }
 
-/* Responsive styles */
-@media (max-width: 1024px) {
-    .program-item {
-        flex: 0 0 calc(33.333% - 1rem);
-    }
-}
-
-@media (max-width: 768px) {
-    .program-item {
-        flex: 0 0 calc(50% - 1rem);
-    }
-}
-
-@media (max-width: 640px) {
-    .program-item {
-        flex: 0 0 calc(100% - 1rem);
-    }
-}
-
 /* Estilos para el carrusel */
 #carousel {
   max-width: 100%;
@@ -233,34 +214,98 @@ body {
   transform: scale(1.2);
 }
 
+/* Estilos para la sección de Shorts */
+#shorts {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+#shorts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.short-item {
+  aspect-ratio: 9/16;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.short-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.short-item iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#load-more-shorts {
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#load-more-shorts:hover {
+  background-color: var(--lead-gray);
+}
+
 /* Responsive */
+@media (max-width: 1024px) {
+    .program-item {
+        flex: 0 0 calc(33.333% - 1rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .program-item {
+        flex: 0 0 calc(50% - 1rem);
+    }
+    
+    #shorts-container {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
 @media (max-width: 640px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 
-  #program-grid .program-slider {
-    scroll-snap-type: x mandatory;
-  }
+    .program-item {
+        flex: 0 0 calc(100% - 1rem);
+    }
 
-  #program-grid .program-item {
-    scroll-snap-align: start;
-  }
+    #program-grid .program-slider {
+        scroll-snap-type: x mandatory;
+    }
 
-  .carousel-control, .carousel-indicators {
-    opacity: 1;
-  }
-  
-  #bottom-nav {
-    height: 50px;
-  }
-  
-  #bottom-nav a {
-    font-size: 0.7rem;
-  }
-  
-  #bottom-nav i {
-    font-size: 1.2rem;
-  }
+    #program-grid .program-item {
+        scroll-snap-align: start;
+    }
+
+    .carousel-control, .carousel-indicators {
+        opacity: 1;
+    }
+    
+    #bottom-nav {
+        height: 50px;
+    }
+    
+    #bottom-nav a {
+        font-size: 0.7rem;
+    }
+    
+    #bottom-nav i {
+        font-size: 1.2rem;
+    }
+    
+    #shorts-container {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
 }
