@@ -41,17 +41,38 @@
     <header id="header"></header>
     <main class="container mx-auto px-4 py-8 space-y-8">
         <div id="carousel" class="w-full max-w-4xl mx-auto relative overflow-hidden rounded-xl shadow-2xl">
-            <!-- ... (contenido del carrusel sin cambios) ... -->
+            <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
+                <!-- Las imágenes se cargarán dinámicamente aquí -->
+            </div>
+            <button class="carousel-control prev absolute top-1/2 left-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button class="carousel-control next absolute top-1/2 right-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            <div class="carousel-indicators absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <!-- Los indicadores se cargarán dinámicamente aquí -->
+            </div>
         </div>
         <div id="ad-banner" class="w-full h-40 bg-cover bg-center rounded-lg shadow-lg relative overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');">
-            <!-- ... (contenido del banner sin cambios) ... -->
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold text-white mb-2">¡Oferta Especial!</h2>
+                    <p class="text-lg text-white mb-4">Suscríbete ahora y obtén un 50% de descuento en tu primer mes.</p>
+                    <a href="#" class="bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300 text-base">Suscribirse Ahora</a>
+                </div>
+            </div>
         </div>
         <section id="program-grid" class="bg-white rounded-lg shadow-lg p-6">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-red-600">Grilla de Programas</h2>
                 <button id="view-all-programs" class="bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300">Ver Todos</button>
             </div>
-            <div class="program-carousel relative overflow-hidden">
+            <div class="program-slider-container relative overflow-hidden">
                 <div class="program-slider flex transition-transform duration-500 ease-in-out">
                     <!-- Los elementos del slider se agregarán dinámicamente con JavaScript -->
                 </div>
@@ -74,12 +95,30 @@
             <div id="counters" class="col-span-1 md:col-span-2 lg:col-span-3"></div>
         </div>
         <div id="app-download" class="w-full flex justify-center items-center">
-            <!-- ... (contenido de descarga de la aplicación sin cambios) ... -->
+            <div class="text-center">
+                <h2 class="text-2xl font-bold mb-4">Descarga nuestra aplicación</h2>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="inline-block">
+                        <img src="images/app-store-badge.png" alt="Descargar en App Store" class="h-12">
+                    </a>
+                    <a href="#" class="inline-block">
+                        <img src="images/google-play-badge.png" alt="Descargar en Google Play" class="h-12">
+                    </a>
+                </div>
+                <div class="mt-8">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Mockup de la aplicación" class="max-w-full h-auto mx-auto rounded-lg shadow-lg">
+                </div>
+            </div>
         </div>
     </main>
     <footer id="footer"></footer>
     <div id="ganacash-float" class="fixed bottom-36 right-4 z-40">
-        <!-- ... (contenido del botón flotante sin cambios) ... -->
+        <a href="https://ganacash.com" class="block bg-yellow-500 hover:bg-yellow-600 text-white font-bold p-4 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110">
+            <img src="images/ganacash-logo.png" alt="GanaCash Logo" class="w-8 h-8">
+        </a>
+        <div id="push-notification" class="mt-2 bg-white text-gray-800 p-2 rounded-lg shadow-md text-center text-sm hidden">
+            Prueba suerte con GanaCash
+        </div>
     </div>
     <div id="whatsapp-float"></div>
     <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg"></nav>
