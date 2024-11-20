@@ -47,15 +47,17 @@ const initProgramSlider = () => {
     
     programData.forEach(program => {
         const programElement = document.createElement('div');
-        programElement.className = 'program-item bg-white rounded-lg shadow-md overflow-hidden';
+        programElement.className = 'program-item';
         programElement.innerHTML = `
             <img src="${program.image}" alt="${program.title}" class="w-full h-32 object-cover">
-            <div class="p-4">
-                <h3 class="font-bold text-lg mb-2">${program.title}</h3>
-                <p class="text-sm text-gray-600">${program.schedule}</p>
+            <div class="content">
+                <h3>${program.title}</h3>
+                <p>${program.schedule}</p>
+                <a href="#" class="btn-ver">Ver</a>
             </div>
         `;
-        programElement.addEventListener('click', () => {
+        programElement.querySelector('.btn-ver').addEventListener('click', (e) => {
+            e.preventDefault();
             // Aquí puedes agregar la lógica para redirigir a la playlist del programa
             console.log(`Redirigiendo a la playlist de ${program.title}`);
         });
@@ -78,11 +80,24 @@ const initProgramSlider = () => {
     autoScroll();
 };
 
+const initFloatingButton = () => {
+    const floatingButton = document.getElementById('floating-button');
+    const pushNotification = document.getElementById('push-notification');
+
+    floatingButton.addEventListener('mouseenter', () => {
+        pushNotification.classList.add('show');
+        setTimeout(() => {
+            pushNotification.classList.remove('show');
+        }, 3000);
+    });
+};
+
 const initApp = async () => {
     try {
         await Promise.all(componentsToLoad.map(({ component, id }) => loadComponent(component, id)));
         console.log('Todos los componentes cargados correctamente');
         initProgramSlider();
+        initFloatingButton();
     } catch (error) {
         console.error('Error durante la inicialización de la aplicación:', error);
     } finally {
