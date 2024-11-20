@@ -44,17 +44,7 @@ const initProgramSlider = () => {
     ];
 
     const sliderContainer = document.querySelector('.program-slider');
-    const prevButton = document.getElementById('prev-program');
-    const nextButton = document.getElementById('next-program');
     const viewAllButton = document.getElementById('view-all-programs');
-
-    let currentIndex = 0;
-    const itemsPerView = 4; // Ajusta este valor según el número de elementos que quieras mostrar a la vez
-
-    const updateSlider = () => {
-        const translateValue = -currentIndex * (100 / itemsPerView);
-        sliderContainer.style.transform = `translateX(${translateValue}%)`;
-    };
 
     const createProgramElement = (program) => {
         const programElement = document.createElement('div');
@@ -75,25 +65,9 @@ const initProgramSlider = () => {
         sliderContainer.appendChild(programElement);
     });
 
-    prevButton.addEventListener('click', () => {
-        currentIndex = Math.max(currentIndex - 1, 0);
-        updateSlider();
-    });
-
-    nextButton.addEventListener('click', () => {
-        currentIndex = Math.min(currentIndex + 1, programData.length - itemsPerView);
-        updateSlider();
-    });
-
     viewAllButton.addEventListener('click', () => {
         // Implementa la lógica para mostrar todos los programas
         console.log('Mostrar todos los programas');
-    });
-
-    // Actualizar el slider cuando cambie el tamaño de la ventana
-    window.addEventListener('resize', () => {
-        currentIndex = 0;
-        updateSlider();
     });
 };
 
