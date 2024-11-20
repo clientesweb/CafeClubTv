@@ -67,15 +67,27 @@
                 </div>
             </div>
         </div>
-        <div id="program-grid" class="overflow-hidden bg-gray-100 rounded-lg p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-red-600">Grilla de Programas</h2>
-                <a href="#" class="bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition duration-300">Ver Programación Completa</a>
+        <section id="program-grid" class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-red-600">Grilla de Programas</h2>
+                <button id="view-all-programs" class="bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300">Ver Todos</button>
             </div>
-            <div class="program-slider flex space-x-4 overflow-x-auto pb-4">
-                <!-- Los elementos del slider se agregarán dinámicamente con JavaScript -->
+            <div class="program-slider-container relative overflow-hidden">
+                <div class="program-slider flex transition-transform duration-500 ease-in-out">
+                    <!-- Los elementos del slider se agregarán dinámicamente con JavaScript -->
+                </div>
+                <button id="prev-program" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button id="next-program" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
             </div>
-        </div>
+        </section>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div id="playlists" class="col-span-1"></div>
             <div id="shorts" class="col-span-1"></div>
