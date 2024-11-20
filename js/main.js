@@ -44,40 +44,57 @@ const initProgramSlider = () => {
     ];
 
     const sliderContainer = document.querySelector('.program-slider');
-    
-    programData.forEach(program => {
+    const prevButton = document.getElementById('prev-program');
+    const nextButton = document.getElementById('next-program');
+    const viewAllButton = document.getElementById('view-all-programs');
+
+    let currentIndex = 0;
+    const itemsPerView = 4; // Ajusta este valor según el número de elementos que quieras mostrar a la vez
+
+    const updateSlider = () => {
+        const translateValue = -currentIndex * (100 / itemsPerView);
+        sliderContainer.style.transform = `translateX(${translateValue}%)`;
+    };
+
+    const createProgramElement = (program) => {
         const programElement = document.createElement('div');
         programElement.className = 'program-item';
         programElement.innerHTML = `
             <img src="${program.image}" alt="${program.title}" class="w-full h-32 object-cover">
             <div class="content">
-                <h3>${program.title}</h3>
-                <p>${program.schedule}</p>
-                <a href="#" class="btn-ver">Ver</a>
+                <h3 class="text-lg font-semibold">${program.title}</h3>
+                <p class="text-sm text-gray-600">${program.schedule}</p>
+                <a href="#" class="btn-ver mt-2 inline-block">Ver más</a>
             </div>
         `;
-        programElement.querySelector('.btn-ver').addEventListener('click', (e) => {
-            e.preventDefault();
-            // Aquí puedes agregar la lógica para redirigir a la playlist del programa
-            console.log(`Redirigiendo a la playlist de ${program.title}`);
-        });
+        return programElement;
+    };
+
+    programData.forEach(program => {
+        const programElement = createProgramElement(program);
         sliderContainer.appendChild(programElement);
     });
 
-    // Implementar desplazamiento automático
-    let scrollPosition = 0;
-    const scrollSpeed = 1; // Ajusta la velocidad de desplazamiento
+    prevButton.addEventListener('click', () => {
+        currentIndex = Math.max(currentIndex - 1, 0);
+        updateSlider();
+    });
 
-    const autoScroll = () => {
-        scrollPosition += scrollSpeed;
-        if (scrollPosition >= sliderContainer.scrollWidth - sliderContainer.clientWidth) {
-            scrollPosition = 0;
-        }
-        sliderContainer.scrollTo(scrollPosition, 0);
-        requestAnimationFrame(autoScroll);
-    };
+    nextButton.addEventListener('click', () => {
+        currentIndex = Math.min(currentIndex + 1, programData.length - itemsPerView);
+        updateSlider();
+    });
 
-    autoScroll();
+    viewAllButton.addEventListener('click', () => {
+        // Implementa la lógica para mostrar todos los programas
+        console.log('Mostrar todos los programas');
+    });
+
+    // Actualizar el slider cuando cambie el tamaño de la ventana
+    window.addEventListener('resize', () => {
+        currentIndex = 0;
+        updateSlider();
+    });
 };
 
 const initFloatingButton = () => {
