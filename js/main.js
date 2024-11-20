@@ -34,7 +34,7 @@ const componentsToLoad = [
     { component: BottomNav, id: 'bottom-nav' }
 ];
 
-const initProgramSlider = () => {
+const initProgramCarousel = () => {
     const programData = [
         { title: 'Café Mañanero', schedule: 'Lunes a Viernes, 7:00 AM', image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
         { title: 'Noticias al Día', schedule: 'Lunes a Viernes, 12:00 PM', image: 'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
@@ -44,13 +44,18 @@ const initProgramSlider = () => {
     ];
 
     const sliderContainer = document.querySelector('.program-slider');
+    const prevButton = document.getElementById('prev-program');
+    const nextButton = document.getElementById('next-program');
     const viewAllButton = document.getElementById('view-all-programs');
-    
+
+    let currentIndex = 0;
+    const itemsPerView = Math.floor(sliderContainer.clientWidth / 300);
+
     const createProgramElement = (program) => {
         const programElement = document.createElement('div');
         programElement.className = 'program-item';
         programElement.innerHTML = `
-            <img src="${program.image}" alt="${program.title}" class="w-full h-32 object-cover">
+            <img src="${program.image}" alt="${program.title}" class="w-full h-40 object-cover">
             <div class="content">
                 <h3 class="text-lg font-semibold">${program.title}</h3>
                 <p class="text-sm text-gray-600">${program.schedule}</p>
@@ -60,12 +65,24 @@ const initProgramSlider = () => {
         return programElement;
     };
 
-    // Duplicar los programas para crear un efecto de desplazamiento infinito
-    const allPrograms = [...programData, ...programData];
-
-    allPrograms.forEach(program => {
+    programData.forEach(program => {
         const programElement = createProgramElement(program);
         sliderContainer.appendChild(programElement);
+    });
+
+    const updateSlider = () => {
+        const translateValue = -currentIndex * (100 / itemsPerView);
+        sliderContainer.style.transform = `translateX(${translateValue}%)`;
+    };
+
+    prevButton.addEventListener('click', () => {
+        currentIndex = Math.max(currentIndex - 1, 0);
+        updateSlider();
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentIndex = Math.min(currentIndex + 1, programData.length - itemsPerView);
+        updateSlider();
     });
 
     viewAllButton.addEventListener('click', () => {
@@ -73,12 +90,17 @@ const initProgramSlider = () => {
         console.log('Mostrar todos los programas');
     });
 
-    // Reiniciar la animación cuando termine
-    sliderContainer.addEventListener('animationiteration', () => {
-        sliderContainer.style.animation = 'none';
-        sliderContainer.offsetHeight; // Trigger reflow
-        sliderContainer.style.animation = null;
+    // Actualizar el slider cuando cambie el tamaño de la ventana
+    window.addEventListener('resize', () => {
+        currentIndex = 0;
+        updateSlider();
     });
+
+    // Iniciar el carrusel automático
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % (programData.length - itemsPerView + 1);
+        updateSlider();
+    }, 5000);
 };
 
 const initFloatingButton = () => {
@@ -97,7 +119,7 @@ const initApp = async () => {
     try {
         await Promise.all(componentsToLoad.map(({ component, id }) => loadComponent(component, id)));
         console.log('Todos los componentes cargados correctamente');
-        initProgramSlider();
+        initProgramCarousel();
         initFloatingButton();
     } catch (error) {
         console.error('Error durante la inicialización de la aplicación:', error);
