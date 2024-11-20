@@ -3,18 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CafeClubTV</title>
-    <meta name="description" content="Bienvenido a CafeClubTV, tu lugar para disfrutar de los mejores videos y playlists.">
-    <meta name="keywords" content="CafeClubTV, videos, playlists, entretenimiento">
+    <title>CafeClubTV - Tu lugar para disfrutar de los mejores videos y playlists</title>
+    <meta name="description" content="Bienvenido a CafeClubTV, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad.">
+    <meta name="keywords" content="CafeClubTV, videos, playlists, entretenimiento, contenido exclusivo">
     <link rel="icon" href="images/Icon512x512.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="images/Icon512x512.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        #preloader {
-            transition: opacity 0.5s ease-out;
-        }
-    </style>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.cafeclubtv.com/">
+    <meta property="og:title" content="CafeClubTV - Tu lugar para disfrutar de los mejores videos y playlists">
+    <meta property="og:description" content="Bienvenido a CafeClubTV, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad.">
+    <meta property="og:image" content="https://www.cafeclubtv.com/images/Icon512x512.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.cafeclubtv.com/">
+    <meta property="twitter:title" content="CafeClubTV - Tu lugar para disfrutar de los mejores videos y playlists">
+    <meta property="twitter:description" content="Bienvenido a CafeClubTV, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad.">
+    <meta property="twitter:image" content="https://www.cafeclubtv.com/images/Icon512x512.png">
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <!-- Theme color for browser -->
+    <meta name="theme-color" content="#ff0000">
 </head>
 <body class="min-h-screen bg-gradient-to-br from-white to-gray-300 text-gray-800 font-sans">
     <div id="preloader" class="fixed inset-0 flex items-center justify-center bg-white z-50">
@@ -24,9 +41,16 @@
     <header id="header"></header>
     <main class="container mx-auto px-4 py-8 space-y-8">
         <div id="carousel" class="w-full"></div>
-        <div id="ad-banner" class="w-full bg-gray-200 p-4 rounded-lg shadow-md">
-            <h2 class="text-xl font-bold mb-2">Publicidad</h2>
-            <img src="https://via.placeholder.com/1200x200?text=Banner+Publicitario" alt="Banner Publicitario" class="w-full h-auto rounded">
+        <div id="ad-banner" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 p-6 rounded-lg shadow-lg text-white">
+            <h2 class="text-2xl font-bold mb-2">¡Oferta Especial!</h2>
+            <p class="mb-4">Suscríbete ahora y obtén un 50% de descuento en tu primer mes.</p>
+            <a href="#" class="bg-white text-purple-500 font-bold py-2 px-4 rounded hover:bg-purple-100 transition duration-300">Suscribirse</a>
+        </div>
+        <div id="program-grid" class="overflow-hidden">
+            <h2 class="text-2xl font-bold mb-4">Grilla de Programas</h2>
+            <div class="program-slider flex space-x-4 overflow-x-auto pb-4">
+                <!-- Los elementos del slider se agregarán dinámicamente con JavaScript -->
+            </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div id="playlists" class="col-span-1"></div>
@@ -50,55 +74,16 @@
                 </div>
             </div>
         </div>
-        <div id="program-grid">
-            <h2 class="text-2xl font-bold mb-4">Grilla de Programas</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Programa 1" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Café Mañanero</h3>
-                        <p class="text-sm text-gray-600">Lunes a Viernes, 7:00 AM</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1588600878108-578307a3cc9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Programa 2" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Noticias al Día</h3>
-                        <p class="text-sm text-gray-600">Lunes a Viernes, 12:00 PM</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Programa 3" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Cocina con Sabor</h3>
-                        <p class="text-sm text-gray-600">Sábados y Domingos, 2:00 PM</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1603190287605-e6ade32fa852?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Programa 4" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Cine Club</h3>
-                        <p class="text-sm text-gray-600">Viernes, 9:00 PM</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="ad-slider">
-            <h2 class="text-2xl font-bold mb-4">Anuncios</h2>
-            <div class="slider fade-in">
-                <div class="slider-content">
-                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Anuncio 1" class="slider-item">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Anuncio 2" class="slider-item">
-                    <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Anuncio 3" class="slider-item">
-                </div>
-            </div>
-        </div>
     </main>
     <footer id="footer"></footer>
-    <div id="floating-button" class="fixed bottom-24 right-4 z-40">
-        <a href="https://ejemplo.com" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold p-4 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110">
-            <img src="https://via.placeholder.com/30" alt="Logo" class="w-6 h-6">
+    <div id="floating-button" class="fixed bottom-32 right-4 z-40">
+        <a href="https://ganacash.com" class="block bg-yellow-500 hover:bg-yellow-600 text-white font-bold p-4 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110 relative">
+            <img src="images/ganacash-logo.png" alt="GanaCash Logo" class="w-8 h-8">
+            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">¡Nuevo!</span>
         </a>
+        <div class="mt-2 bg-white text-gray-800 p-2 rounded-lg shadow-md text-center text-sm">
+            Prueba suerte con GanaCash
+        </div>
     </div>
     <div id="whatsapp-float"></div>
     <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg"></nav>
@@ -106,15 +91,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/main.js" type="module"></script>
     <script>
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 500);
-            }
-        });
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
     </script>
 </body>
 </html>
