@@ -41,13 +41,18 @@
     <header id="header"></header>
     <main class="container mx-auto px-4 py-8 space-y-8">
         <div id="carousel" class="w-full"></div>
-        <div id="ad-banner" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 p-6 rounded-lg shadow-lg text-white">
-            <h2 class="text-2xl font-bold mb-2">¡Oferta Especial!</h2>
-            <p class="mb-4">Suscríbete ahora y obtén un 50% de descuento en tu primer mes.</p>
-            <a href="#" class="bg-white text-purple-500 font-bold py-2 px-4 rounded hover:bg-purple-100 transition duration-300">Suscribirse</a>
+        <div id="ad-banner" class="w-full bg-gradient-to-r from-red-600 to-yellow-500 p-6 rounded-lg shadow-lg text-white flex items-center justify-between">
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold mb-2">¡Oferta Especial!</h2>
+                <p class="mb-4">Suscríbete ahora y obtén un 50% de descuento en tu primer mes.</p>
+                <a href="#" class="bg-white text-red-600 font-bold py-2 px-4 rounded hover:bg-red-100 transition duration-300">Suscribirse</a>
+            </div>
+            <div class="flex-1">
+                <img src="https://via.placeholder.com/400x200" alt="Oferta especial" class="w-full h-auto rounded-lg shadow-md">
+            </div>
         </div>
-        <div id="program-grid" class="overflow-hidden">
-            <h2 class="text-2xl font-bold mb-4">Grilla de Programas</h2>
+        <div id="program-grid" class="overflow-hidden bg-gray-100 rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4 text-red-600">Grilla de Programas</h2>
             <div class="program-slider flex space-x-4 overflow-x-auto pb-4">
                 <!-- Los elementos del slider se agregarán dinámicamente con JavaScript -->
             </div>
@@ -76,12 +81,11 @@
         </div>
     </main>
     <footer id="footer"></footer>
-    <div id="floating-button" class="fixed bottom-32 right-4 z-40">
-        <a href="https://ganacash.com" class="block bg-yellow-500 hover:bg-yellow-600 text-white font-bold p-4 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110 relative">
+    <div id="floating-button" class="fixed bottom-24 right-4 z-40">
+        <a href="https://ganacash.com" class="block bg-yellow-500 hover:bg-yellow-600 text-white font-bold p-4 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110">
             <img src="images/ganacash-logo.png" alt="GanaCash Logo" class="w-8 h-8">
-            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">¡Nuevo!</span>
         </a>
-        <div class="mt-2 bg-white text-gray-800 p-2 rounded-lg shadow-md text-center text-sm">
+        <div id="push-notification" class="mt-2 bg-white text-gray-800 p-2 rounded-lg shadow-md text-center text-sm hidden">
             Prueba suerte con GanaCash
         </div>
     </div>
@@ -90,16 +94,5 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/main.js" type="module"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-            });
-        }
-    </script>
 </body>
 </html>
