@@ -36,10 +36,10 @@ const componentsToLoad = [
 
 const initProgramSlider = () => {
     const programData = [
-        { title: 'Café Mañanero', schedule: 'Lunes a Viernes, 7:00 AM', image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
-        { title: 'Noticias al Día', schedule: 'Lunes a Viernes, 12:00 PM', image: 'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
-        { title: 'Cocina con Sabor', schedule: 'Sábados y Domingos, 2:00 PM', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
-        { title: 'Cine Club', schedule: 'Viernes, 9:00 PM', image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
+        { title: 'Café Mañanero', schedule: 'Lunes a Viernes, 7:00 AM', image: 'images/gutiss.png' },
+        { title: 'Noticias al Día', schedule: 'Lunes a Viernes, 12:00 PM', image: 'images/juan.png' },
+        { title: 'Cocina con Sabor', schedule: 'Sábados y Domingos, 2:00 PM', image: 'images/omtalks.png' },
+        { title: 'Cine Club', schedule: 'Viernes, 9:00 PM', image: 'images/cafeteros.png' },
         { title: 'Música en Vivo', schedule: 'Sábados, 8:00 PM', image: 'https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' },
     ];
 
