@@ -33,105 +33,93 @@
     <!-- Theme color for browser -->
     <meta name="theme-color" content="#ff0000">
 </head>
-<body class="min-h-screen bg-gradient-to-br from-white to-gray-300 text-gray-800 font-sans relative">
-    <svg class="fixed inset-0 z-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <defs>
-            <pattern id="coffee-pattern" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="1" fill="#f3e8d6" opacity="0.3" />
-                <path d="M5 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" fill="#8b4513" opacity="0.1" />
-            </pattern>
-        </defs>
-        <rect x="0" y="0" width="100%" height="100%" fill="url(#coffee-pattern)" />
-    </svg>
-
-    <div class="relative z-10">
-        <div id="preloader" class="fixed inset-0 flex items-center justify-center bg-white z-50">
-            <div class="loader w-16 h-16 border-8 border-gray-200 border-t-8 border-t-red-600 rounded-full animate-spin"></div>
-        </div>
-
-        <header id="header"></header>
-        <main class="container mx-auto px-4 py-8 space-y-8">
-            <div id="carousel" class="w-full max-w-4xl mx-auto relative overflow-hidden rounded-xl shadow-2xl">
-                <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
-                    <!-- Las imágenes se cargarán dinámicamente aquí -->
-                </div>
-                <button class="carousel-control prev absolute top-1/2 left-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button class="carousel-control next absolute top-1/2 right-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-                <div class="carousel-indicators absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                    <!-- Los indicadores se cargarán dinámicamente aquí -->
-                </div>
-            </div>
-            <div id="ad-banner" class="w-full h-40 bg-cover bg-center rounded-lg shadow-lg relative overflow-hidden" style="background-image: url('images/banner.png');">
-                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div class="text-center">
-                        <h2 class="text-2xl font-bold text-white mb-2">Llegó Gana Cash</h2>
-                        <p class="text-lg text-white mb-4">Gana premios en efectivo y participa de eventos exclusivos</p>
-                        <a href="#" class="bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300 text-base">JUEGA</a>
-                    </div>
-                </div>
-            </div>
-            <section id="program-grid" class="bg-white rounded-lg shadow-lg p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold text-red-600">Parrilla de Programas</h2>
-                    <button id="view-all-programs" class="bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300">Ver Todos</button>
-                </div>
-                <div class="program-slider-container relative overflow-x-auto">
-                    <div class="program-slider flex space-x-4">
-                        <!-- Los elementos del slider se agregarán dinámicamente con JavaScript -->
-                    </div>
-                </div>
-            </section>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div id="playlists" class="col-span-1"></div>
-                <div id="shorts" class="col-span-1">
-                    <h2 class="text-2xl font-bold mb-4">Shorts</h2>
-                    <div class="shorts-container overflow-x-auto">
-                        <div class="shorts-slider flex space-x-4">
-                            <!-- Los shorts se cargarán dinámicamente aquí -->
-                        </div>
-                    </div>
-                    <button id="load-more-shorts" class="mt-4 bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300">Cargar más</button>
-                </div>
-                <div id="sponsors" class="col-span-1"></div>
-                <div id="counters" class="col-span-1 md:col-span-2 lg:col-span-3"></div>
-            </div>
-            <div id="app-download" class="w-full flex justify-center items-center">
-                <div class="text-center">
-                    <h2 class="text-2xl font-bold mb-4">Descarga nuestra aplicación</h2>
-                    <div class="flex justify-center space-x-4">
-                        <a href="#" class="inline-block">
-                            <img src="images/app-store-badge.png" alt="Descargar en App Store" class="h-12 rounded-lg">
-                        </a>
-                        <a href="#" class="inline-block">
-                            <img src="images/google-play-badge.png" alt="Descargar en Google Play" class="h-12 rounded-lg">
-                        </a>
-                    </div>
-                    <div class="mt-8">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Mockup de la aplicación" class="max-w-full h-auto mx-auto rounded-lg shadow-lg">
-                    </div>
-                </div>
-            </div>
-        </main>
-        <footer id="footer"></footer>
-        <div id="ganacash-float" class="fixed bottom-36 right-6 z-50">
-            <a href="https://ganacash.com" class="flex items-center justify-center w-16 h-16 bg-red-500 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50">
-                <img src="images/ganacashlogo.png" alt="GanaCash Logo" class="w-12 h-12 object-contain">
-            </a>
-            <div id="push-notification" class="mt-2 bg-white text-gray-800 p-2 rounded-lg shadow-md text-center text-sm hidden">
-                Prueba suerte con GanaCash
-            </div>
-        </div>
-        <div id="whatsapp-float"></div>
-        <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg"></nav>
+<body class="min-h-screen bg-gradient-to-br from-white to-gray-300 text-gray-800 font-sans">
+    <div id="preloader" class="fixed inset-0 flex items-center justify-center bg-white z-50">
+        <div class="loader w-16 h-16 border-8 border-gray-200 border-t-8 border-t-red-600 rounded-full animate-spin"></div>
     </div>
+
+    <header id="header"></header>
+    <main class="container mx-auto px-4 py-8 space-y-8">
+        <div id="carousel" class="w-full max-w-4xl mx-auto relative overflow-hidden rounded-xl shadow-2xl">
+            <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
+                <!-- Las imágenes se cargarán dinámicamente aquí -->
+            </div>
+            <button class="carousel-control prev absolute top-1/2 left-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button class="carousel-control next absolute top-1/2 right-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            <div class="carousel-indicators absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <!-- Los indicadores se cargarán dinámicamente aquí -->
+            </div>
+        </div>
+        <div id="ad-banner" class="w-full h-40 bg-cover bg-center rounded-lg shadow-lg relative overflow-hidden" style="background-image: url('images/banner.png');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold text-white mb-2">Llegó Gana Cash</h2>
+                    <p class="text-lg text-white mb-4">Gana premios en efectivo y participa de eventos exclusivos</p>
+                    <a href="#" class="bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300 text-base">JUEGA</a>
+                </div>
+            </div>
+        </div>
+        <section id="program-grid" class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-red-600">Parrilla de Programas</h2>
+                <button id="view-all-programs" class="bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300">Ver Todos</button>
+            </div>
+            <div class="program-slider-container relative overflow-x-auto">
+                <div class="program-slider flex space-x-4">
+                    <!-- Los elementos del slider se agregarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </section>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="playlists" class="col-span-1"></div>
+            <div id="shorts" class="col-span-1">
+                <h2 class="text-2xl font-bold mb-4">Shorts</h2>
+                <div class="shorts-container overflow-x-auto">
+                    <div class="shorts-slider flex space-x-4">
+                        <!-- Los shorts se cargarán dinámicamente aquí -->
+                    </div>
+                </div>
+                <button id="load-more-shorts" class="mt-4 bg-red-600 text-white font-bold py-2 px-4 rounded-full hover:bg-red-700 transition duration-300">Cargar más</button>
+            </div>
+            <div id="sponsors" class="col-span-1"></div>
+            <div id="counters" class="col-span-1 md:col-span-2 lg:col-span-3"></div>
+        </div>
+        <div id="app-download" class="w-full flex justify-center items-center">
+    <div class="text-center">
+        <h2 class="text-2xl font-bold mb-4">Descarga nuestra aplicación</h2>
+        <div class="flex justify-center space-x-4">
+            <a href="#" class="inline-block">
+                <img src="images/app-store-badge.png" alt="Descargar en App Store" class="h-12 rounded-lg">
+            </a>
+            <a href="#" class="inline-block">
+                <img src="images/google-play-badge.png" alt="Descargar en Google Play" class="h-12 rounded-lg">
+            </a>
+        </div>
+        <div class="mt-8">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Mockup de la aplicación" class="max-w-full h-auto mx-auto rounded-lg shadow-lg">
+        </div>
+    </div>
+</div>
+    </main>
+    <footer id="footer"></footer>
+    <div id="ganacash-float" class="fixed bottom-36 right-6 z-50">
+    <a href="https://ganacash.com" class="flex items-center justify-center w-16 h-16 bg-red-500 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50">
+        <img src="images/ganacashlogo.png" alt="GanaCash Logo" class="w-12 h-12 object-contain">
+    </a>
+    <div id="push-notification" class="mt-2 bg-white text-gray-800 p-2 rounded-lg shadow-md text-center text-sm hidden">
+        Prueba suerte con GanaCash
+    </div>
+</div>
+<div id="whatsapp-float"></div>
+<nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg"></nav>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/main.js" type="module"></script>
