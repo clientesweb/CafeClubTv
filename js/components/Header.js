@@ -11,7 +11,7 @@ export default function Header() {
 
     header.innerHTML = `
         <div class="bg-red-600 text-white py-2 px-4 text-center text-sm font-medium" id="top-banner">
-            ¡Oferta especial! Suscríbete ahora y obtén un 50% de descuento en tu primer mes.
+            ¿te sientes con suerte? Premiamos tu fidelidad, gana dinero en efectivo en nuestra Ruleta!
             <button class="ml-2 underline hover:text-yellow-300 transition-colors duration-200">Saber más</button>
         </div>
         <header class="bg-white text-gray-800 shadow-md z-50">
