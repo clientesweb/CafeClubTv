@@ -4,10 +4,8 @@ export default function WhatsAppFloat() {
     if (whatsappFloat) {
         whatsappFloat.innerHTML = `
             <div class="fixed bottom-20 right-6 z-50">
-                <button id="open-whatsapp-modal" class="bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50" aria-label="Abrir chat de WhatsApp">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
-                        <path d="M12 2C6.48 2 2 6.48 2 12c0 2.17.7 4.19 1.94 5.86L2.87 22l4.14-1.07C8.58 21.62 10.24 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.63 0-3.18-.4-4.53-1.11l-2.07.53.53-2.07C4.98 15.18 4 13.63 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm-1-3h2v-2h-2v2zm0-4h2V7h-2v6z"/>
-                    </svg>
+                <button id="open-whatsapp-modal" class="bg-green-500 text-white rounded-full p-2 shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50" aria-label="Abrir chat de WhatsApp">
+                    <img src="/path-to-your-logo.png" alt="CaféClubTV Logo" class="w-10 h-10 object-contain" />
                 </button>
             </div>
             <div id="whatsapp-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
