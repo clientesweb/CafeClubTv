@@ -307,3 +307,20 @@ body {
       height: 266px; /* Aspecto 16:9 para 150px de ancho */
     }
 }
+body {
+  padding-bottom: 70px;
+}
+
+#bottom-nav {
+  height: 70px; /* Ajusta este valor según la altura real de tu barra de navegación */
+}
+
+@media (max-width: 640px) {
+  #bottom-nav {
+    height: 50px;
+  }
+  
+  body {
+    padding-bottom: 50px;
+  }
+}
