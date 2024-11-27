@@ -3,53 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CafeClubTV - Tu lugar para disfrutar de los mejores videos y playlists</title>
-    <meta name="description" content="Bienvenido a CafeClubTV, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad.">
-    <meta name="keywords" content="CafeClubTV, videos, playlists, entretenimiento, contenido exclusivo">
-    <link rel="icon" href="images/Icon512x512.png" sizes="32x32" type="image/png">
+    <title>CafeClubTV - Tu destino para los mejores videos y playlists en Málaga</title>
+    <meta name="description" content="Descubre CafeClubTV en Málaga, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad. Contenido exclusivo y experiencias únicas.">
+    <meta name="keywords" content="CafeClubTV, videos, playlists, entretenimiento, Málaga, contenido exclusivo">
+    <link rel="canonical" href="https://www.cafeclubtv.com/">
+    <link rel="icon" href="images/Icon512x512.png" sizes="512x512" type="image/png">
     <link rel="apple-touch-icon" href="images/Icon512x512.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/main.css">
-    <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Preload critical assets -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+    <link rel="preload" href="images/Icon512x512.png" as="image">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.cafeclubtv.com/">
-    <meta property="og:title" content="CafeClubTV - Tu lugar para disfrutar de los mejores videos y playlists">
-    <meta property="og:description" content="Bienvenido a CafeClubTV, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad.">
-    <meta property="og:image" content="https://www.cafeclubtv.com/images/Icon512x512.png">
+    <meta property="og:title" content="CafeClubTV - Tu destino para los mejores videos y playlists en Málaga">
+    <meta property="og:description" content="Descubre CafeClubTV en Málaga, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad. Contenido exclusivo y experiencias únicas.">
+    <meta property="og:image" content="https://www.cafeclubtv.com/images/og-image.jpg">
+    <meta property="og:image:alt" content="CafeClubTV - Experiencia de entretenimiento en Málaga">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.cafeclubtv.com/">
-    <meta property="twitter:title" content="CafeClubTV - Tu lugar para disfrutar de los mejores videos y playlists">
-    <meta property="twitter:description" content="Bienvenido a CafeClubTV, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad.">
-    <meta property="twitter:image" content="https://www.cafeclubtv.com/images/Icon512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.cafeclubtv.com/">
+    <meta name="twitter:title" content="CafeClubTV - Tu destino para los mejores videos y playlists en Málaga">
+    <meta name="twitter:description" content="Descubre CafeClubTV en Málaga, tu destino para disfrutar de los mejores videos, playlists y entretenimiento de calidad. Contenido exclusivo y experiencias únicas.">
+    <meta name="twitter:image" content="https://www.cafeclubtv.com/images/twitter-image.jpg">
+    <meta name="twitter:image:alt" content="CafeClubTV - Experiencia de entretenimiento en Málaga">
 
     <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <!-- Theme color for browser -->
     <meta name="theme-color" content="#ff0000">
+
+    <!-- Structured Data for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "CafeClubTV",
+      "image": "https://www.cafeclubtv.com/images/Icon512x512.png",
+      "url": "https://www.cafeclubtv.com",
+      "telephone": "+34123456789",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Ejemplo 123",
+        "addressLocality": "Málaga",
+        "postalCode": "29001",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 36.7201600,
+        "longitude": -4.4203400
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://www.facebook.com/cafeclubtv",
+        "https://www.instagram.com/cafeclubtv",
+        "https://www.youtube.com/cafeclubtv"
+      ]
+    }
+    </script>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-white to-gray-100 text-gray-800 font-sans">
+    <!-- New SVG Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none opacity-5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <defs>
+                <pattern id="cafe-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <text x="10" y="50" font-family="Arial, sans-serif" font-size="20" fill="#FF0000">CAFE</text>
+                    <text x="50" y="80" font-family="Arial, sans-serif" font-size="15" fill="#FF0000">CLUB</text>
+                    <circle cx="80" cy="20" r="10" fill="#FF0000" opacity="0.5" />
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#cafe-pattern)" />
+        </svg>
+    </div>
+
     <div id="preloader" class="fixed inset-0 flex items-center justify-center bg-white z-50">
         <div class="loader w-16 h-16 border-8 border-gray-200 border-t-8 border-t-red-600 rounded-full animate-spin"></div>
     </div>
 
-    <header id="header"></header>
-    <main class="container mx-auto px-4 py-8 space-y-8">
+    <header id="header" role="banner"></header>
+    <main class="container mx-auto px-4 py-8 space-y-8" role="main">
         <div id="carousel" class="w-full max-w-4xl mx-auto relative overflow-hidden rounded-xl shadow-2xl">
             <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
                 <!-- Las imágenes se cargarán dinámicamente aquí -->
             </div>
-            <button class="carousel-control prev absolute top-1/2 left-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+            <button class="carousel-control prev absolute top-1/2 left-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500" aria-label="Anterior imagen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
-            <button class="carousel-control next absolute top-1/2 right-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+            <button class="carousel-control next absolute top-1/2 right-4 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full shadow-md hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-red-500" aria-label="Siguiente imagen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
@@ -93,33 +157,33 @@
             <div id="counters" class="col-span-1 md:col-span-2 lg:col-span-3"></div>
         </div>
         <div id="app-download" class="w-full flex justify-center items-center">
-    <div class="text-center">
-        <h2 class="text-2xl font-bold mb-4">Descarga nuestra aplicación</h2>
-        <div class="flex justify-center space-x-4">
-            <a href="#" class="inline-block">
-                <img src="images/app-store-badge.png" alt="Descargar en App Store" class="h-12 rounded-lg">
-            </a>
-            <a href="#" class="inline-block">
-                <img src="images/google-play-badge.png" alt="Descargar en Google Play" class="h-12 rounded-lg">
-            </a>
+            <div class="text-center">
+                <h2 class="text-2xl font-bold mb-4">Descarga nuestra aplicación</h2>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="inline-block">
+                        <img src="images/app-store-badge.png" alt="Descargar en App Store" class="h-12 rounded-lg" width="120" height="40">
+                    </a>
+                    <a href="#" class="inline-block">
+                        <img src="images/google-play-badge.png" alt="Descargar en Google Play" class="h-12 rounded-lg" width="135" height="40">
+                    </a>
+                </div>
+                <div class="mt-8">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Mockup de la aplicación CafeClubTV" class="max-w-full h-auto mx-auto rounded-lg shadow-lg" width="1000" height="667">
+                </div>
+            </div>
         </div>
-        <div class="mt-8">
-            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Mockup de la aplicación" class="max-w-full h-auto mx-auto rounded-lg shadow-lg">
-        </div>
-    </div>
-</div>
     </main>
-    <footer id="footer"></footer>
+    <footer id="footer" role="contentinfo"></footer>
     <div id="ganacash-float" class="fixed bottom-36 right-6 z-50">
-    <a href="https://ganacash.com" class="flex items-center justify-center w-16 h-16 bg-red-500 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50">
-        <img src="images/ganacashlogo.png" alt="GanaCash Logo" class="w-12 h-12 object-contain">
-    </a>
-    <div id="push-notification" class="mt-2 bg-white text-gray-800 p-2 rounded-lg shadow-md text-center text-sm hidden">
-        Prueba suerte con GanaCash
+        <a href="https://ganacash.com" class="flex items-center justify-center w-16 h-16 bg-red-500 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50" aria-label="Ir a GanaCash">
+            <img src="images/ganacashlogo.png" alt="GanaCash Logo" class="w-12 h-12 object-contain" width="48" height="48">
+        </a>
+        <div id="push-notification" class="mt-2 bg-white text-gray-800 p-2 rounded-lg shadow-md text-center text-sm hidden">
+            Prueba suerte con GanaCash
+        </div>
     </div>
-</div>
-<div id="whatsapp-float"></div>
-<nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg"></nav>
+    <div id="whatsapp-float"></div>
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg" role="navigation"></nav>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/main.js" type="module"></script>
