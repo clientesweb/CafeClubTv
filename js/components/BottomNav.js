@@ -3,7 +3,7 @@ export default function BottomNav() {
 
     if (bottomNav) {
         bottomNav.innerHTML = `
-            <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+            <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-[9999]">
                 <div class="max-w-screen-xl mx-auto px-4">
                     <ul class="flex justify-between items-center py-2">
                         <li>
