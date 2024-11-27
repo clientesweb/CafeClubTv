@@ -81,3 +81,6 @@ export default function WhatsAppFloat() {
         });
     }
 }
+
+// Asegúrate de llamar a la función para inicializar el componente
+WhatsAppFloat();
