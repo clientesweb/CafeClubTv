@@ -10,7 +10,7 @@ export default function Header() {
     const isInstallable = checkInstallable();
 
     header.innerHTML = `
-        <div class="bg-red-600 text-white py-2 px-4 text-center text-sm font-medium" id="top-banner">
+        <div class="bg-gradient-to-br from-[#ff0000] via-[#8B0000] to-[#1a1a1a] text-white py-2 px-4 text-center text-sm font-medium" id="top-banner">
             ¿Te sientes con suerte? Premiamos tu fidelidad, gana dinero en efectivo en nuestra Ruleta!
             <button class="ml-2 underline hover:text-yellow-300 transition-colors duration-200">Saber más</button>
         </div>
