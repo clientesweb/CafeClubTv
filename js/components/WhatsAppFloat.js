@@ -5,7 +5,7 @@ export default function WhatsAppFloat() {
         whatsappFloat.innerHTML = `
             <div class="fixed bottom-20 right-6 z-50">
                 <button id="open-whatsapp-modal" class="bg-green-500 text-white rounded-full p-2 shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50" aria-label="Abrir chat de WhatsApp">
-                    <img src="/path-to-your-logo.png" alt="CaféClubTV Logo" class="w-10 h-10 object-contain" />
+                    <img src="images/logi.svg" alt="CaféClubTV Logo" class="w-10 h-10 object-contain" />
                 </button>
             </div>
             <div id="whatsapp-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
